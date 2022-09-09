@@ -1,0 +1,382 @@
+{%- liquid
+  assign locale_label_t = 'general.language.dropdown_label' | t
+  assign currency_label_t = 'general.currency.dropdown_label' | t
+  assign newsletter_placeholder_t = 'layout.footer.newsletter_placeholder' | t
+  assign newsletter_button_t = 'layout.footer.newsletter_button' | t
+  assign navigation_t = 'layout.footer.navigation' | t
+  assign shopify_disclaimer_t = 'shopify.online_store.spam_detection.disclaimer_html' | t
+
+  assign block_count = section.blocks.size
+  assign locale_enable = false
+  assign currency_enable = false
+
+  if section.settings.show-currency-selector and shop.enabled_currencies.size > 1
+    assign currency_enable = true
+  endif
+
+  if section.settings.show-locale-selector and shop.published_locales.size > 1
+    assign locale_enable = true
+  endif
+-%}
+<marquee direction="left" behavior="scroll" scrollamount="10" style="height:45px;width:100%;background-color:#ff8b87;font-size:26px;color:#ffffff; padding: 12px" > 
+  <span style="margin-right: 200px">NO PETROL, JUST BEAUTY !</span>
+  <span style="margin-right: 200px">NO PETROL, JUST BEAUTY !</span>
+  <span style="margin-right: 200px">NO PETROL, JUST BEAUTY !</span>
+  <span style="margin-right: 200px">NO PETROL, JUST BEAUTY !</span>
+  <span style="margin-right: 200px">NO PETROL, JUST BEAUTY !</span>
+  <span style="margin-right: 200px">NO PETROL, JUST BEAUTY !</span>
+  <span style="margin-right: 200px">NO PETROL, JUST BEAUTY !</span>
+  <span style="margin-right: 200px">NO PETROL, JUST BEAUTY !</span>
+  <span style="margin-right: 200px">NO PETROL, JUST BEAUTY !</span>
+  <span style="margin-right: 200px">NO PETROL, JUST BEAUTY !</span>
+  <span style="margin-right: 200px">NO PETROL, JUST BEAUTY !</span>
+  <span style="margin-right: 200px">NO PETROL, JUST BEAUTY !</span>
+</marquee>
+<footer
+  class="footer--root"
+  data-js-class="Footer"
+  data-section-id="{{ section.id }}"
+  data-section-type="footer"
+>
+  <div class="footer--blocks">
+    <div class="footer--block" data-block-type="about">
+    	<div class="footer--block--container">     
+           <div class="footer--block--heading" data-item="block-heading">
+             {% if request.locale.iso_code == 'fr' %}
+             <b>CONTACTEZ-NOUS</b>
+             {% else %}
+             <b>CONTACT US</b>
+             {% endif %}
+           </div>
+           <div class="footer--block--body">     
+             <div class="footer--about-text" data-item="rte-content">
+               {% if request.locale.iso_code == 'fr' %}
+                          <p>Appelez-nous au <strong>+33(0)1 45 24 28 36</strong><br>Écrivez-nous à l'adresse : <strong>hello@z-et-ma.com</strong><br></p>
+                          {% else %}
+                          <p>Call us at <strong>+33(0)1 45 24 28 36</strong><br> Write to us at: <strong>hello@z-et-ma.com</strong><br></p>
+                          {% endif %}
+                
+             </div>    
+             <div class="footer--social-icons">
+                <a rel="noreferrer" target="_blank" href="https://fr-fr.facebook.com/ZetMA.paris/" role="img" aria-label="facebook">  
+                <svg class="icon--root icon--facebook" viewBox="0 0 20 20">
+                  <path d="M18.896 0H1.104C.494 0 0 .494 0 1.104v17.793C0 19.506.494 20 1.104 20h9.58v-7.745H8.076V9.237h2.606V7.01c0-2.583 1.578-3.99 3.883-3.99 1.104 0 2.052.082 2.329.119v2.7h-1.598c-1.254 0-1.496.597-1.496 1.47v1.928h2.989l-.39 3.018h-2.6V20h5.098c.608 0 1.102-.494 1.102-1.104V1.104C20 .494 19.506 0 18.896 0z" fill-rule="evenodd"></path>
+                </svg>
+                </a>
+                <a rel="noreferrer" target="_blank" href="https://www.instagram.com/zetma.paris/?hl=fr" role="img" aria-label="instagram">  
+                <svg class="icon--root icon--instagram" viewBox="0 0 20 20">
+                  <path d="M15.33 5.87a1.208 1.208 0 01-1.2-1.197 1.215 1.215 0 011.207-1.212c.649.002 1.198.55 1.202 1.2.005.659-.547 1.21-1.21 1.209zm-5.332 9.273c-2.828 0-5.128-2.297-5.14-5.134-.013-2.83 2.31-5.148 5.148-5.138a5.126 5.126 0 015.124 5.137 5.14 5.14 0 01-5.133 5.135zm-.01-1.808a3.343 3.343 0 003.342-3.324 3.348 3.348 0 00-3.325-3.34 3.343 3.343 0 00-3.34 3.324 3.34 3.34 0 003.324 3.34zM1.787 9.997h.038c0 1.052-.018 2.104.007 3.154.015.652.048 1.311.16 1.953.259 1.484 1.12 2.454 2.597 2.845.737.195 1.492.215 2.243.222 2.11.016 4.219.017 6.328-.002a11.723 11.723 0 001.952-.162c1.483-.265 2.451-1.13 2.834-2.61.214-.821.218-1.663.225-2.5.018-1.931.02-3.863-.002-5.793-.008-.725-.042-1.458-.16-2.171-.25-1.502-1.116-2.488-2.614-2.878-.82-.213-1.663-.218-2.5-.225-1.93-.018-3.861-.02-5.793.002-.724.008-1.456.047-2.17.16-1.4.224-2.388 1-2.81 2.382a6.122 6.122 0 00-.247 1.519c-.056 1.367-.062 2.736-.088 4.104zM20 7.143v5.715c-.01.104-.024.208-.031.313-.044.658-.056 1.32-.137 1.975-.117.95-.44 1.833-1.019 2.607-1.072 1.433-2.57 2.03-4.296 2.164-.446.035-.895.055-1.343.083H6.786c-.092-.01-.183-.028-.274-.034-.473-.03-.95-.04-1.421-.092-1.032-.114-1.998-.424-2.84-1.051C.812 17.748.215 16.247.084 14.514c-.033-.419-.056-.84-.083-1.26V6.746c.014-.157.025-.314.04-.47.067-.63.08-1.27.21-1.887C.638 2.56 1.686 1.245 3.44.532c.932-.379 1.919-.46 2.913-.49.263-.008.526-.028.79-.042h5.714c.09.01.183.024.274.03.671.045 1.347.054 2.014.14 1.044.133 2.002.507 2.823 1.191 1.31 1.094 1.833 2.555 1.948 4.202.037.526.056 1.053.084 1.58z" fill-rule="evenodd"></path>
+                </svg>
+                </a>
+                <a rel="noreferrer" target="_blank" href="https://www.youtube.com/channel/UC-ygd_90tWumCGIa-2lOSXw/videos" role="img" aria-label="youtube">
+                <svg class="icon--root icon--youtube" viewBox="0 0 29 20">
+                  <path d="M28.166 3.123c.596 2.228.596 6.877.596 6.877s0 4.649-.596 6.877a3.577 3.577 0 01-2.522 2.526C23.419 20 14.5 20 14.5 20s-8.92 0-11.145-.597a3.575 3.575 0 01-2.521-2.526C.238 14.649.238 10 .238 10s0-4.649.596-6.877A3.574 3.574 0 013.355.597C5.58 0 14.5 0 14.5 0s8.92 0 11.144.597a3.576 3.576 0 012.522 2.526zM11.583 14.221L19.038 10l-7.455-4.221v8.442z" fill-rule="evenodd"></path>
+                </svg>
+                </a>
+                <a rel="noreferrer" target="_blank" href="https://www.tiktok.com/@zetma.paris" role="img" aria-label="tiktoka">   
+                <svg class="icon--root icon--tiktok" viewBox="0 0 24 24">
+                  <path d="M19.619 2H4.381A2.384 2.384 0 002 4.381v15.238A2.384 2.384 0 004.381 22h15.238A2.384 2.384 0 0022 19.619V4.381A2.384 2.384 0 0019.619 2m-1.902 8.725a3.568 3.568 0 01-3.314-1.597v5.494a4.06 4.06 0 11-4.06-4.06c.085 0 .167.008.25.013v2c-.083-.01-.164-.025-.25-.025a2.072 2.072 0 100 4.145c1.145 0 2.156-.902 2.156-2.046l.02-9.33h1.914A3.566 3.566 0 0017.719 8.5v2.224" fill-rule="nonzero"></path>
+                </svg> 
+                </a>
+               {% comment %}
+                <a rel="noreferrer" target="_blank"  href="/en/pages/ou-nous-trouver" role="img" aria-label="Account" >
+                  <img width="20px" height="20px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/NEW_ICONES-01.svg?v=1634560343" data-ly-processed="1652219989907">
+                </a>
+               {% endcomment %}
+             </div>
+           </div>
+        </div>
+    </div>
+        <div class="footer--block" data-block-type="about">
+    	<div class="footer--block--container">     
+           <div class="footer--block--heading" data-item="block-heading">
+             {% if request.locale.iso_code == 'fr' %}
+             <b>A PROPOS</b>
+             {% else %}
+             <b>ABOUT</b>
+             {% endif %}
+              
+           </div>
+           <div class="footer--block--body">     
+             <div class="footer--about-text" data-item="rte-content">
+               <p>
+                 <a href="/pages/nos-labels" style="text-decoration: none;">
+                   {% if request.locale.iso_code == 'fr' %}
+                   <b>En savoir + sur nos Labels</b>
+                   {% else %}
+                   <b>Learn more about our Labels</b>
+                   {% endif %}
+                 </a>
+                 <br>
+                 <a href="/pages/zoom-sur-nos-huiles" style="text-decoration: none;">
+                   {% if request.locale.iso_code == 'fr' %}
+                   <b>Zoom sur nos huiles</b>
+                   {% else %}
+                   <b>Focus on our oils</b>
+                   {% endif %}
+                   
+                 </a>
+               </p>
+             </div>    
+           </div>
+        </div>
+          
+    </div>
+    <div class="footer--block" data-block-type="about">
+    	<div class="footer--block--container">     
+           <div class="footer--block--heading" data-item="block-heading">
+             {% if request.locale.iso_code == 'fr' %}
+             <b>INFOS PRATIQUES</b>
+             {% else %}
+             <b>INFORMATIONS</b>
+             {% endif %}
+           </div>
+           <div class="footer--block--body">     
+             <div class="footer--about-text" data-item="rte-content">
+                <p>
+                  <a href="/pages/livraison" style="text-decoration: none;">
+                    {% if request.locale.iso_code == 'fr' %}
+                   Livraison
+                   {% else %}
+                   Delivery
+                   {% endif %}
+                  </a>
+                  <br>
+                  <a href="/pages/faq" style="text-decoration: none;">FAQ</a>
+                  <br>
+                  <a href="/pages/jobs-postulez" style="text-decoration: none;">
+                    {% if request.locale.iso_code == 'fr' %}
+                   Rejoindre la Team
+                   {% else %}
+                   Join the team
+                   {% endif %}</a>
+                  <br>
+                  <div>
+                    <a href="/pages/ou-nous-trouver" style="text-decoration: none;">
+                      {% if request.locale.iso_code == 'fr' %}
+                     Où nous trouver ?
+                     {% else %}
+                     Where to find us
+                     {% endif %}
+                      </a>
+                      <a rel="noreferrer" target="_blank"  href="/en/pages/ou-nous-trouver" role="img" aria-label="Account" >
+                        <img width="20px" height="20px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/NEW_ICONES-01.svg?v=1634560343" data-ly-processed="1652219989907" style="transform: translateY(-5px);">
+                      </a>     
+                  </div>
+           
+
+               </p>
+             </div>    
+           </div>
+        </div>
+          
+    </div>
+    
+  </div>
+<!-- SELECTOR -->
+  <div class="footer--sub" style="display: none;">
+    {% if locale_enable or currency_enable %}
+      <div class="footer--sub--block" data-type="localization">
+        <div class="footer--sub--container">
+          {% form 'localization', id: 'footer-localization' %}
+
+            {% if locale_enable %}
+              {%- capture locale_values -%}
+                {%- for locale in form.available_locales -%}
+                  {{ locale.iso_code }},
+                {%- endfor -%}
+              {%- endcapture -%}
+
+              {% assign locale_values = locale_values | split: "," %}
+
+              {%- capture locale_names -%}
+                {%- for locale in form.available_locales -%}
+                  {{ locale.endonym_name }},
+                {%- endfor -%}
+              {%- endcapture -%}
+
+              {% assign locale_names = locale_names | split: "," %}
+
+              {%
+                render 'framework--disclosure',
+                label_name: locale_label_t,
+                option_names: locale_names,
+                option_values: locale_values,
+                current_value: form.current_locale.iso_code,
+                id: 'footer-locale',
+                input_name: 'locale_code',
+                type: 'localization'
+              %}
+            {% endif %}
+
+            {% if currency_enable %}
+              {%- capture currency_values -%}
+                {%- for currency in form.available_currencies -%}
+                  {{ currency.iso_code }},
+                {%- endfor -%}
+              {%- endcapture -%}
+
+              {% assign currency_values = currency_values | split: "," %}
+
+              {%- capture currency_names -%}
+                {%- for currency in form.available_currencies -%}
+                  {{ currency.iso_code }} {%- if currency.symbol -%}{{ currency.symbol }}{%- endif -%},
+                {%- endfor -%}
+              {%- endcapture -%}
+
+              {% assign currency_names = currency_names | split: "," %}
+
+              {%
+                render 'framework--disclosure',
+                label_name: currency_label_t,
+                option_names: currency_names,
+                option_values: currency_values,
+                current_value: form.current_currency.iso_code,
+                id: 'footer-currency',
+                input_name: 'currency_code',
+                type: 'localization'
+              %}
+            {% endif %}
+
+          {% endform %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% unless shop.enabled_payment_types == empty %}
+      {% if section.settings.show-payment-icons %}
+        <div class="footer--sub--block" data-type="payment-icons">
+          <div class="footer--sub--container">
+            {% render 'framework--payment-icons' %}
+          </div>
+        </div>
+      {% endif %}
+    {% endunless %}
+    
+    </div>
+    
+  
+
+</footer>
+<div data-type="policies" style="text-align: center;  padding-bottom: 50px">
+      <div style='max-width: 718px; margin: auto;'>
+      {% for policy in shop.policies %}
+        <a  style="width: 270px; padding-left: 20px; padding-right:20px" href="{{ policy.url }}" >{{ policy.title }}</a>
+      {% endfor %}
+        </div>
+    </div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section--footer",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Currency Selector",
+      "info": "To add a currency, go to your [payment settings](/admin/settings/payments)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show-currency-selector",
+      "label": "Show currency selector",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "To offer multiple currencies on your online store, you must first [edit your store's currency formatting](https://docs.shopify.com/support/settings/general/tell-my-script-where-to-find-money-formats)."
+    },
+    {
+      "type": "header",
+      "content": "Language Selector",
+      "info": "To add a language, go to your [language settings](/admin/settings/languages)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show-locale-selector",
+      "label": "Show language selector",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Payment logos"
+    },
+    {
+      "type": "checkbox",
+      "id": "show-payment-icons",
+      "label": "Enable",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "about",
+      "name": "About and copyright",
+      "settings": [
+        {
+          "type": "text",
+          "id": "about-title",
+          "label": "Title",
+          "default": "About the store"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description and copyright",
+          "default": "<p>2021 © Your brand name here.<br><br>A brief store summary, tagline, or vision statement.<p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "subscribe--show-social-icons",
+          "label": "Show social icons",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu-title",
+          "label": "Title",
+          "default": "Quick links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer",
+          "info": "This menu won't show submenu items."
+        }
+      ]
+    },
+    {
+      "type": "subscribe",
+      "name": "Subscribe",
+      "settings": [
+        {
+          "id": "newsletter--heading",
+          "label": "Newsletter heading",
+          "type": "text",
+          "default": "Newsletter"
+        },
+        {
+          "id": "newsletter--info",
+          "label": "Newsletter information",
+          "type": "richtext",
+          "default": "<p>Be the first to receive updates on new arrivals, special promos and sales.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "subscribe--show-newsletter",
+          "label": "Show newsletter",
+          "default": true
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

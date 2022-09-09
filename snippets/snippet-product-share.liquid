@@ -1,0 +1,45 @@
+<div style="width: 300px; text-align: center; margin: auto">Partager ce produit</div>
+<div class="product-share--root" style="background: rgba(255, 255, 255, 0)">
+  {% capture shareurl %}{{ shop.url }}{{ product.url }}{% endcapture %}
+ 
+  {% if share_twitter %}
+    <a
+      class=""
+      data-item="accent-text"
+      href="whatsapp://send?text={{ shareurl }}"
+      rel="noreferrer"
+      style="display: inline-block; margin-right: 30px"
+    >
+  	<img src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/whatsapp_4.png?v=1634561867" style="width: 40px;">
+    </a>
+
+  {% endif %}
+	
+  {% if share_facebook %}
+    <a
+      class=""
+      data-item="accent-text"
+      href="https://www.facebook.com/sharer.php?u={{ shareurl }}&t={{ product.title }}"
+      rel="noreferrer"
+      style="display: inline-block"
+    >
+      <img src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/facebook_2.png?v=1634561791" style="width: 40px;"
+      >
+      
+    </a>
+
+  {% endif %}
+
+  {% if share_pinterest %}
+    <a
+      class=""
+      data-item="accent-text"
+      href="https://www.instagram.com/sharer.php?u={{ shareurl }}"
+      count-layout="none"
+      rel="noreferrer"
+      style="display: inline-block; margin-left: 30px"
+    >
+      <img src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/instagram_1.png?v=1634561791" style="width: 40px;">
+    </a>
+  {% endif %}
+</div>

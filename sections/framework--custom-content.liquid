@@ -1,0 +1,49 @@
+{%- liquid
+
+  assign activelang = request.locale.name
+  if activelang == "English"
+    assign customeng = true
+  else
+  assign customeng = false
+  endif
+
+
+-%}
+<div
+  class="custom-content--root"
+  data-item="rte-content"
+  data-section-id="{{ section.id }}"
+> 
+  {%if customeng == false %}
+  {{ section.settings.custom_html }}
+  {%else%}
+  {{ section.settings.custom_html_2 }}
+  {%endif %}
+
+</div>
+
+{% schema %}
+  {
+    "name": "Custom content",
+    "settings": [
+      {
+        "id": "custom_html",
+        "label": "French Custom HTML",
+        "type": "html",
+        "default":"<div><p>Some HTML content</p></div>"
+      },
+      {
+        "id": "custom_html_2",
+        "label": "English Custom HTML",
+        "type": "html",
+        "default":"<div><p>Certains contenus HTML</p></div>"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Custom content",
+        "category": "Advanced layout"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,279 @@
+{%- liquid
+  unless type
+    assign type = 'horizontal'
+  endunless
+
+  unless off_canvas
+    assign off_canvas = 'left-sidebar'
+  endunless
+
+  unless overlap_parent
+    assign overlap_parent = 0
+  endunless
+
+  unless js_class
+    assign js_class = 'FrameworkXMenu'
+  endunless
+
+  unless handle
+    assign handle = 'main-menu'
+  endunless
+
+  unless view
+    assign view = 'cart'
+  endunless
+-%}
+
+<nav
+  class="x-menu"
+  data-js-class="{{ js_class }}"
+  data-item="nav-text"
+  data-x-menu--align="{{ align }}"
+  data-x-menu--overlap="false"
+  data-x-menu--overlap-parent="{{ overlap_parent }}"
+  role="navigation"
+  aria-label="{{ 'general.menu' | t }}"
+>
+  {% unless use_external_icon %}
+    <div class="x-menu--overlap-icon">
+      <div
+        tabindex="0"
+        data-off-canvas--open="{{ off_canvas }}"
+        data-off-canvas--view="{{ view }}"
+        aria-haspopup="menu"
+      >
+        {% render 'framework--icons', icon: 'menu' %}
+      </div>
+    </div>
+  {% endunless %}
+
+  <ul class="x-menu--level-1--container">
+
+    {% comment %} Level 1 {% endcomment %}
+    {% assign list_lvl_1 = handle %}
+    {% for link in linklists[list_lvl_1].links %}
+      
+      <li
+        class="x-menu--level-1--link"
+        data-x-menu--depth="{{ link.levels | plus: 1 }}"
+        data-x-menu--open="false"
+        data-state="closed"
+        data-link-id="{{ link.handle }}"
+        {% if link.title == "Z&MA Lovers" %}
+          style="width: 20%"
+        {% endif %}
+      >
+        {% if link.url != blank %}
+        	{% if link.title == "Logo" %}
+                <a
+                  href="/"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="x-menu--sub-{{ link.handle }}"
+                  id ="customlogomenu"
+                >
+                  <img src='https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_WEB_NOIR_HD.png?v=1662664793'
+                   >
+                </a>
+       		{% else %}
+                <a
+                  {% if link.title != "LA MARQUE" %}
+                  href="{{ link.url }}{% if request.locale.iso_code == 'en' and link.url contains "pages" %}-en{%endif%}"
+                  {% else %}
+                  href=""
+                  style="cursor: default"
+                  {% endif %}
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="x-menu--sub-{{ link.handle }}"
+                >
+                  <span>
+                    {{ link.title }}
+                  </span>
+                  {% if link.links != blank %}
+                    {% render 'framework--icons', icon: 'chevron-down' %}
+                    {% render 'framework--icons', icon: 'chevron-up' %}
+                  {% endif %}
+                </a>
+        	{% endif %}
+        {% endif %}
+
+          {% comment %} Level 2 {% endcomment %}
+          {% if link.links != blank %}
+            <div
+              class="x-menu--level-2--container"
+              id="x-menu--sub-{{ link.handle }}"
+              data-js-class="Transition"
+              style="transform: translateY(-19px);"
+            >
+              {% if link.handle == "nos-produits" %}
+              
+                <ul class="x-menu--level-2--list">
+                  <li class="x-menu--level-2--link" data-link-id="nos-produits--la-gamme">
+                    <ul class="x-menu--level-3--container">
+
+
+                      <li class="x-menu--level-3--link" >
+                        <a href="{% if request.locale.iso_code == 'en' %}/en{%endif%}/collections/la-gamme">
+                          {% if request.locale.iso_code == 'fr' %}
+                                LA GAMME
+                                {% else %}
+                                SHOP ALL
+                                {% endif %}      
+                        </a>
+                      </li>
+
+
+                      <li class="x-menu--level-3--link" >
+                        <a href="{% if request.locale.iso_code == 'en' %}/en{%endif%}/collections/deodorants">
+                          {% if request.locale.iso_code == 'fr' %}
+                                DÉODORANTS
+                                {% else %}
+                                DEODORANTS
+                                {% endif %}      
+                        </a>
+                      </li>
+                      <li class="x-menu--level-3--link" >
+                        <a href="{% if request.locale.iso_code == 'en' %}/en{%endif%}/collections/soins">
+                          {% if request.locale.iso_code == 'fr' %}
+                          SOINS
+                          {% else %}
+                          SKINCARE
+                          {% endif %}
+                        </a>
+                      </li>
+                      <li class="x-menu--level-3--link" >
+                        <a href="{% if request.locale.iso_code == 'en' %}/en{%endif%}/collections/maquillage">
+                          {% if request.locale.iso_code == 'fr' %}
+                          MAQUILLAGE
+                          {% else %}
+                          MAKE-UP
+                          {% endif %}
+                         
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="x-menu--level-2--link" data-link-id="nos-produits--la-gamme">
+                    <ul class="x-menu--level-3--container">
+                      <li class="x-menu--level-3--link" >
+                        <a href="{% if request.locale.iso_code == 'en' %}/en{%endif%}/collections/focus-imperfections">
+                          {% if request.locale.iso_code == 'fr' %}
+                          FOCUS IMPERFECTIONS
+                          {% else %}
+                          FOCUS ON BLEMISHES
+                          {% endif %}
+                        </a>
+                      </li>
+                      <li class="x-menu--level-3--link" >
+                        <a href="{% if request.locale.iso_code == 'en' %}/en{%endif%}/collections/routine-peau-seche">
+                          {% if request.locale.iso_code == 'fr' %}
+                          {{"routine peaux sèches" | upcase}}
+                          {% else %}
+                          {{"Dry skin routine" | upcase}}
+                          {% endif %}
+                        </a>
+                      </li>
+                      <li class="x-menu--level-3--link" >
+                        <a href="{% if request.locale.iso_code == 'en' %}/en{%endif%}/collections/routine-peau-grasse">
+                          {% if request.locale.iso_code == 'fr' %}
+                          {{"routine peaux mixtes à grasses" | upcase}}
+                          {% else %}
+                          {{"Combination to oily skin routine" | upcase}}
+                          {% endif %}
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="x-menu--level-2--link" style="background-color: #000; width: 1px; height: calc(100% - 30px);"></li>
+                  <li class="x-menu--level-2--link" data-link-id="nos-produits--la-gamme">
+                    <ul class="x-menu--level-3--container">
+                      <li class="x-menu--level-3--link" >
+                        <a href="{% if request.locale.iso_code == 'en' %}/en{%endif%}/collections/collabs">
+                          {% if request.locale.iso_code == 'fr' %}
+                          COLLABS
+                          {% else %}
+                          COLLABS
+                          {% endif %}
+                        </a>
+                      </li>
+                      <li class="x-menu--level-3--link" >
+                        <a href="{% if request.locale.iso_code == 'en' %}/en{%endif%}/collections/coffrets">
+                          {% if request.locale.iso_code == 'fr' %}
+                          COFFRETS
+                          {% else %}
+                          BEAUTY SETS
+                          {% endif %}
+                        </a>
+                      </li>
+                      <li class="x-menu--level-3--link" >
+                        <a href="{% if request.locale.iso_code == 'en' %}/en{%endif%}/products/carte-cadeau-z-ma">
+                          {% if request.locale.iso_code == 'fr' %}
+                          CARTE CADEAU
+                          {% else %}
+                          GIFT CARD
+                          {% endif %}
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+              </ul>
+      		  {% else %}
+              
+
+              <ul class="x-menu--level-2--list" style="transform: translateY(-19px);height: calc(100% - 30px);">
+
+                {% assign list_lvl_2 = link.handle %}
+                {% for link in linklists[list_lvl_2].links %}
+
+                  <li
+                    class="x-menu--level-2--link"
+                    data-link-id="{{ list_lvl_2 }}--{{ link.handle }}"
+                    {% if link.links == blank %}
+                      data-x-menu--single-parent="true"
+                    {% endif %}
+                  >
+                    <a href="{{ link.url }}{% if request.locale.iso_code == 'en' and link.url contains "pages" %}-en{%endif%}">{{ link.title }}</a>
+
+                    {% comment %} Level 3 {% endcomment %}
+
+                    {% if link.links != blank %}
+                      <ul class="x-menu--level-3--container">
+
+                        {% assign list_lvl_3 = link.handle %}
+                        {% for link in linklists[list_lvl_3].links %}
+                          <li
+                            class="x-menu--level-3--link"
+                            data-link-id="{{ list_lvl_2 }}--{{ list_lvl_3 }}--{{ link.handle }}"
+                          >
+                            <a href="{{ link.url }}">{{ link.title }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                    {% comment %} End Level 3 {% endcomment %}
+
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+           {% endif %}
+          {% endif %}
+          {% comment %} End Level 2 {% endcomment %}
+
+      </li>
+    {% endfor %}
+  </ul>
+  {% comment %} End level 1 {% endcomment %}
+</nav>
+
+<noscript>
+  <style>
+    .x-menu--level-1--link:hover .x-menu--level-2--container {
+      z-index: 1;
+      display: flex;
+      opacity: 1;
+      height: auto;
+    }
+  </style>
+</noscript>

@@ -1,0 +1,105 @@
+{%- liquid
+  assign similar_products_heading = section.settings.product-similar-products-heading
+  assign show_section = section.settings.product-similar-products-show
+
+  assign product_share_enabled = section.settings.product-share-show
+  assign facebook_share_enabled = section.settings.product-share-facebook
+  assign twitter_share_enabled = section.settings.product-share-twitter
+  assign pinterest_share_enabled = section.settings.product-share-pinterest
+  assign infotext = section.settings.infotext
+
+  assign max_products = 4
+-%}
+
+{% if show_section %}
+  <div
+    class="product-recommendations--root"
+    data-product-id="{{ product.id }}"
+    data-max-products="{{ max_products }}"
+    data-js-class="ProductRecommendations"
+  >
+    {% if recommendations.products_count > 0 %}
+      <div
+        class="product-recommendations--container"
+        data-container="section"
+      >
+        {% if similar_products_heading != blank %}
+          <div class="product-recommendations--header" data-container="block">
+            <h2 class="product-recommendations--title" data-item="section-heading">
+             {% if request.locale.iso_code == 'fr' %} 
+              Vous aimerez aussi
+              {% else %}
+             You will also like
+              {% endif %}
+            </h2>
+          </div>
+        {% endif %}
+
+        <div
+          class="product-recommendations--body"
+          data-container="panel"
+          data-columns="4"
+          data-mobile-columns="2"
+        >
+          {% for product in recommendations.products limit: max_products %}
+            {%
+              render 'framework--product--item',
+              product: product,
+              unique_handle: 'recommendation',
+              section_id: section.id,
+              infotext: infotext
+            %}
+          {% endfor %}
+        </div>
+
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="container">
+    <div class="sharing" style="">
+            {% if product_share_enabled %}
+              {%
+                render 'snippet-product-share',
+                product: product,
+                share_twitter: twitter_share_enabled,
+                share_facebook: facebook_share_enabled,
+                share_pinterest: pinterest_share_enabled
+              %}
+            {% endif %}
+        </div>
+    {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: false, product: product %}
+    {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false, product: product %}
+    </div>
+
+
+{% endif %}
+
+{% schema %}
+{
+  "name": "Product recommendations",
+  "class": "section--product-recommendations",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "product-similar-products-show",
+      "label": "Show",
+      "default": true,
+      "info": "Dynamic recommendations change and improve with time. [Learn more](https://help.shopify.com/en/themes/development/recommended-products)"
+    },
+    {
+      "type": "text",
+      "id": "product-similar-products-heading",
+      "label": "Heading",
+      "default": "Vous aimerez aussi"
+    },
+    {
+      "id": "infotext",
+      "label": "Hide optional text on Product",
+      "type": "checkbox",
+      "default": true,
+      "info": "- CERTIFIÉE BIO - Z&MA"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,2756 @@
+<div class="contact-page--root" data-container="section" data-columns="{{ columns }}" style="display: none">
+  <div class="contact-page--header" data-container="panel">
+    <div data-container="block">
+      <h1 data-item="section-heading" data-item="section-heading">
+        {{ page.title }}
+      </h1>
+    </div>
+  </div>
+
+  <div class="contact-page--body" data-container="panel" data-columns="{{ columns }}">
+    {% if page.content != empty %}
+      <div class="contact-page--left-column" data-container="block">
+        <div class="contact-page--content" data-item="rte-content">
+          {{ page.content }}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .title { text-transform: uppercase; font-weight: bold; font-size: 20px; }
+  #map {margin-top: 20px; width: calc(100vw - 20px); height: 700px;}
+  #wrapper { position: relative; overflow: hidden; text-align: center; font-size: 22px;}
+  #over_map { border-radius: 4px 4px 0px 0px;   box-shadow: rgb(0 0 0 / 30%) 3px 1px 70px; position: absolute; top: 150px; left: 50px; z-index: 99; background-color: white; width: 400px; height: 550px}
+  #over_map > div > input { width: calc(100%); float: left; border-radius: 0px !important;}
+  .cross { width: 45px; height: 45px; border: 1px solid rgba(80, 80, 80, 0.3); padding-top: 10px; cursor: pointer; display: none;}
+  @media only screen and (max-width: 768px) {
+    #map { width: calc(100vw);}
+    #over_map {top: 745px; width: calc(100vw); left: 0px; box-shadow: unset; height: auto; min-height: 50px;}
+    #wrapper {overflow: visible; margin-bottom: 70px;}
+  }
+  .unselected {
+   color: black;
+   font-size: 15px;
+  }
+</style>
+
+<div id="wrapper">
+  <div class="title"> 
+     {% if request.locale.iso_code == 'en' %}
+    	Where to find us ?
+     {% else %}
+    	Où nous trouver ? 
+  	 {% endif %}
+  </div>
+   <div id="map" style="">
+
+   </div>
+
+   <div id="over_map">
+     <div style="text-align: center; display: flex;"> <input id="pac-input" placeholder="{% if request.locale.iso_code == 'en' %}Search{% else %}Entrez votre ville{% endif %}"></input><div class="cross" onclick="reset()">X</div></div>
+  	<div id="results" style="overflow-y: scroll; max-height: 489px" ></div>
+   </div>
+</div>
+<div style="text-align: center; margin-top: 50px;font-size: 22px">
+  <div class="title">
+    
+    {% if request.locale.iso_code == 'en' %}
+    	More than 350 points of sales in the world
+     {% else %}
+    	Plus de 350 points de vente partout dans le monde
+  	 {% endif %}
+  </div>
+  <div style="margin-bottom: 100px">
+  	<img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_cosmekitchen.jpg?v=1635172542">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_Galeries-Lafayette_CE.png?v=1635172542">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_Galeries-Lafayette.png?v=1635172542">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_kazidomi.svg?v=1635172541">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_loft_Japan.png?v=1635172541">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_mademoiselle-bio.png?v=1635172542">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_para_monop.png?v=1635172542">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_pharmacy.png?v=1635172542">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_plaza_japon.jpg?v=1635172541">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_Samaritaine.png?v=1635172541">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_Smallable.jpg?v=1635172542">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_SUISSES.png?v=1635172542">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_TDM.png?v=1635172542">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_tokio_hands_japon.png?v=1635172542">
+    <img style="max-width: 180px; width: 100%; margin: 40px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/LOGO_-_PARTENAIRE_bhv.png?v=1635955060">
+  </div>
+</div>
+<div id="abecedaire">
+  <div class="title"> 
+    {% if request.locale.iso_code == 'en' %}
+    	Abecedarium
+     {% else %}
+    	Abécédaire
+  	 {% endif %}
+   </div>
+  <br>
+  <div class="alpha"> 
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('a')"> A </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('b')"> B </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('c')"> C </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('d')"> D </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('e')"> E </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('f')"> F </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('g')"> G </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('h')"> H </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('i')"> I </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('j')"> J </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('k')"> K </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('l')"> L </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('m')"> M </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('n')"> N </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('o')"> O </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('p')"> P </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('q')"> Q </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('r')"> R </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('s')"> S </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('t')"> T </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('u')"> U </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('v')"> V </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('w')"> W </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('x')"> X </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('y')"> Y </span>
+    <span style="margin: 0px 2px;" class="unselected" onclick="switchl('z')"> Z </span>
+  </div>
+  <div class="result">
+  
+  </div>
+</div>
+
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7U9otsAEc6fQE0Sfy9kYLrywEtS47bbU&callback=initMap&libraries=places&v=weekly"
+      async
+    >
+</script>
+<STYLE>
+  #abecedaire {
+  	width: 100%;
+  	text-align: center;
+  }
+  
+  .alpha {
+  	color: rgba(120, 120, 120, 1);
+  	font-weight: bold;
+  cursor: pointer;
+  
+  }
+  
+  .result {
+  	min-height: 100px;
+  }
+</STYLE>
+<script>
+  function switchl(letter) {
+    doc = document.querySelector(".result");
+    res = []
+    for (var i = 0; i < ref.length; i++)  {
+      if (ref[i]["Nom du PDV"][0].toLowerCase() == letter){
+        res.push(ref[i]);
+      }
+    }
+    res.sort((a, b) => a["Nom du PDV"].localeCompare(b["Nom du PDV"]))
+    ret = "";
+    for (var i = 0; i < res.length; i++)  {
+      ret += '<div style="font-size: 14px; margin-top: 10px; margin-bottom: 10px; border-top: 1px solid rgba(80, 80, 80, 0.3); padding-top: 5px;\">'
+         + '<h3 style="margin-bottom: 5px">' + res[i]["Nom du PDV"] + '</br>'
+      	 + res[i]["Adresse"] + ', '
+         + res[i]["Code postal"] + ', ' + res[i]["Ville"] + '</br>'
+      + {% if request.locale.iso_code == 'en' %} "Phone: "{% else %}'Téléphone: '{% endif %} 
+         + ((res[i]["Téléphone"] != void 0) ? res[i]["Téléphone"]: '' ) + '</br> </div>'
+    }
+    if (ret == "") {
+      ret = "<h3 style='color: rgba(120, 120, 120, 1); font-size: 20px; margin-top: 30px'>  {% if request.locale.iso_code == 'en' %} No result {% else %} Aucun resultat{% endif %}  </h3>"
+    } else {
+      ret += '<div style="font-size: 14px; margin-top: 10px; margin-bottom: 10px; border-top: 1px solid rgba(80, 80, 80, 0.3); padding-top: 5px;\"></div>'
+    }
+    doc.innerHTML = ret;
+    }
+  
+</script>
+<script>
+  var map;
+  
+  function reset() {
+     map.setCenter({ lat: 48.50, lng: 2.20 });
+     doc = document.querySelector("#results").innerHTML = "";
+  }
+
+  function log(e){
+    console.log(e);
+  }
+
+  
+function initMap() {
+  // The location of Uluru
+  const paris = { lat: 48.50, lng: 2.20 };
+  // The map, centered at Uluru
+  map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 6,
+    minZoom: 4,
+    center: paris,
+    streetViewControl: false,
+	mapTypeControl: false,
+	fullscreenControl: false,
+    styles: [ { "elementType": "labels.icon", "stylers": [ { "color": "#ffd91a" } ] }, { "featureType": "administrative", "elementType": "geometry", "stylers": [ { "visibility": "off" } ] }, { "featureType": "administrative", "elementType": "labels.text", "stylers": [ { "color": "#ffffff" }, { "lightness": 5 }, { "visibility": "simplified" } ] }, { "featureType": "administrative.land_parcel", "stylers": [ { "visibility": "off" } ] }, { "featureType": "administrative.neighborhood", "stylers": [ { "visibility": "off" } ] }, { "featureType": "landscape", "elementType": "geometry", "stylers": [ { "color": "#ee918b" }, { "saturation": 10 } ] }, { "featureType": "landscape", "elementType": "labels", "stylers": [ { "color": "#ffffff" } ] }, { "featureType": "poi", "stylers": [ { "visibility": "off" } ] }, { "featureType": "road", "elementType": "geometry", "stylers": [ { "color": "#d1756b" } ] }, { "featureType": "road", "elementType": "labels", "stylers": [ { "visibility": "off" } ] }, { "featureType": "road", "elementType": "labels.icon", "stylers": [ { "visibility": "off" } ] }, { "featureType": "road.arterial", "elementType": "labels", "stylers": [ { "visibility": "off" } ] }, { "featureType": "road.highway", "elementType": "labels", "stylers": [ { "visibility": "off" } ] }, { "featureType": "road.local", "stylers": [ { "visibility": "off" } ] }, { "featureType": "transit", "stylers": [ { "visibility": "off" } ] }, { "featureType": "water", "elementType": "geometry", "stylers": [ { "color": "#8df7e2" }, { "saturation": -35 }, { "lightness": 10 } ] }, { "featureType": "water", "elementType": "labels.text", "stylers": [ { "visibility": "off" } ] } ]
+  });
+  const input = document.getElementById("pac-input");
+  const autocomplete = new google.maps.places.Autocomplete(input, {});
+  const marker = new google.maps.Marker({
+    map,
+    anchorPoint: new google.maps.Point(0, -29),
+  });
+  
+  infoWindow = []
+  markers = []
+  for (var i = 0; i < ref.length; i++) {
+    var infoWindowOptions = {
+    content: '<h3>' + ref[i]["Nom du PDV"] +'</h3>'
+      + ((ref[i]["Enseigne"] != void 0) ? ref[i]["Enseigne"] + ', ': '' )+ref[i]["Adresse"] + '</br>'
+         + ref[i]["Ville"] + ', ' + ref[i]["Code postal"] + '</br>'
+         + ((ref[i]["Téléphone"] != void 0) ? ref[i]["Téléphone"]: '' ) + '</br>'
+	};
+    
+    infoWindow[i] = new google.maps.InfoWindow(infoWindowOptions);
+
+    const iconBase =
+    "//cdn.shopify.com/s/files/1/0592/6024/0036/files/1_-_LOGOTYPE-TOTEM-favicon_2e41c869-7502-4fa0-8d4c-06527198560b_32x.png?v=1654047166";
+
+   	markers[i] =  new google.maps.Marker({
+      position: ref[i]["Geo"],
+      map,
+      title: ref[i]["Nom du PDV"]
+    });
+    
+    google.maps.event.addListener(this.markers[i], 'click', (function(markers, infoWindow, i) {
+      return function() {
+     	infoWindow[i].open(map, markers[i]);
+     }
+    })(markers, infoWindow, i));
+  }
+  
+  
+  
+  autocomplete.addListener("place_changed", () => {
+    marker.setVisible(false);
+
+    const place = autocomplete.getPlace();
+
+    if (!place.geometry || !place.geometry.location) {
+      window.alert("No details available for input: '" + place.name + "'");
+      return;
+    }
+
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(6);
+    }
+  	map.setZoom(12);
+
+    marker.setPosition(place.geometry.location);
+  	nearby_shops(marker);
+    marker.setVisible(true);
+    /*
+    console.log("-------------------------")
+    console.log(markers)
+    console.log("-------------------------")
+    */
+
+
+  });
+}
+
+function nearby_shops(marker) {
+  var pos = {
+    lat: marker.position.lat(),
+    lng: marker.position.lng(),
+  }
+  analyse(pos);
+}
+  
+  function geo(){
+    let i = 0;
+    let r = void 0;
+    for (; i < ref.length; i++){
+      r = httpGet(ref[i]["Adresse"] + ", " + ref[i]["Ville"]);
+      ref[i]["Geo"] = r;
+    }
+    console.log(JSON.stringify(ref));
+  }
+  
+function httpGet(address)
+{
+  	address = encodeURI(address);
+    var key = "AIzaSyA7U9otsAEc6fQE0Sfy9kYLrywEtS47bbU"
+    var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + key
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", url, false ); // false for synchronous request
+    xmlHttp.send( null );
+    var geo = JSON.parse(xmlHttp.responseText)["results"][0]["geometry"]["location"];
+  return geo;
+    
+}
+  
+  function analyse(geo) {
+    res = []
+    for (var i = 0; i < ref.length; i++){
+      a = geo["lat"] - ref[i]["Geo"]["lat"];
+      b = geo["lng"] - ref[i]["Geo"]["lng"];
+      res[i] = ref[i];
+      res[i]["dist"] = (Math.sqrt((a * a) + (b * b)));
+    }
+    
+    res.sort(function (a, b) {
+      return a["dist"] - b["dist"];
+    });
+    doc = document.querySelector("#results");
+    ret = "";
+    for (var i = 0; i < 4; i++) {
+      ret += '<div style="font-size: 14px; margin-top: 10px; margin-bottom: 10px; border-bottom: 1px solid rgba(80, 80, 80, 0.3); padding-bottom: 5px;\">'
+         + '<h3 style="margin-bottom: 5px">' + res[i]["Nom du PDV"] +', ' + (res[i]["dist"] * 111).toFixed(1) + 'km </h3>'
+      	 +res[i]["Adresse"] + ', '
+         + res[i]["Ville"] + ', ' + res[i]["Code postal"] + '</br>'
+      	 +  {% if request.locale.iso_code == 'en' %} "Phone: "{% else %}'Téléphone: '{% endif %} 
+         + ((res[i]["Téléphone"] != void 0) ? res[i]["Téléphone"]: '' ) + '</br> </div>'
+    }
+    ret += "<STYLE>@media only screen and (max-width: 768px) {#wrapper {margin-bottom: 650px !important;}} #over_map > div > input {width: calc(100% - 45px) !important;} .cross{display: block !important;}</STYLE>"
+    doc.innerHTML = ret;
+    
+  }
+
+
+var ref = [
+    {
+        "Nom du PDV":"Drugstore Publicis",
+        "Adresse":"133, avenue des Champs Elysées",
+        "Code postal":"75008",
+        "Ville":"Paris",
+        "Téléphone":"01 44 43 75 39",
+        "Geo":{
+            "lat":48.872519,
+            "lng":2.2970641
+        }
+    },
+  	{
+        "Nom du PDV":"Bien l'Épicerie",
+        "Adresse":"61, rue de la Pompe",
+        "Code postal":"75016",
+        "Ville":"Paris",
+        "Téléphone":"01 44 96 75 51",
+        "Geo":{
+            "lat":48.862897,
+            "lng":2.276236
+        }
+    },
+  	{
+        "Nom du PDV":"Bien l'Épicerie",
+        "Adresse":"8, rue des quatre fils ",
+        "Code postal":"75003",
+        "Ville":"Paris",
+        "Téléphone":" 01 57 40 95 07",
+        "Geo":{
+            "lat":48.8602624,
+            "lng":2.3604162
+        }  
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Beaugrenelle",
+        "Adresse":"7, rue Linois",
+        "Code postal":"75015",
+        "Ville":"Paris",
+        "Téléphone":"01 83 18 08 00",
+        "Geo":{
+            "lat":48.8492955,
+            "lng":2.2825022
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Champs-Élysées",
+        "Adresse":"60, avenue des Champs-Élysées",
+        "Code postal":"75008",
+        "Ville":"Paris",
+        "Téléphone":"01 83 65 61 00",
+        "Geo":{
+            "lat":48.87045250000001,
+            "lng":2.3062966
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Haussmann",
+        "Adresse":"40, Boulevard Haussmann",
+        "Code postal":"75009",
+        "Ville":"Paris",
+        "Téléphone":"01 42 82 34 56",
+        "Geo":{
+            "lat":48.8736289,
+            "lng":2.3320155
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Annecy",
+        "Adresse":"Avenue du Parmelan",
+        "Code postal":"74 009",
+        "Ville":"Annecy",
+        "Téléphone":"04 50 33 82 10",
+        "Geo":{
+            "lat":45.9059606,
+            "lng":6.133319600000001
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Bordeaux ",
+        "Adresse":"Place Puy Paulin",
+        "Code postal":"33 036",
+        "Ville":"Bordeaux ",
+        "Téléphone":"05 56 90 92 71",
+        "Geo":{
+            "lat":44.8412662,
+            "lng":-0.5755963
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette  Grenoble",
+        "Adresse":"12, place Grenette ",
+        "Code postal":"38 041",
+        "Ville":"Grenoble ",
+        "Téléphone":"04 76 47 28 54",
+        "Geo":{
+            "lat":45.190896,
+            "lng":5.726824700000001
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Lyon Bron",
+        "Adresse":"209-221, boulevard Pinel",
+        "Code postal":"69 671",
+        "Ville":"Bron",
+        "Téléphone":"04 78 77 82 12",
+        "Geo":{
+            "lat":45.7313246,
+            "lng":4.8894381
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Montparnasse",
+        "Adresse":"22, rue du Départ",
+        "Code postal":"75 015",
+        "Ville":"Paris ",
+        "Téléphone":"01 45 38 52 87",
+        "Geo":{
+            "lat":48.8426524,
+            "lng":2.3228065
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Marseille Bourse",
+        "Adresse":"28, rue Bir Hakeim",
+        "Code postal":"13 001",
+        "Ville":"Marseille",
+        "Téléphone":"04 91 56 82 12",
+        "Geo":{
+            "lat":43.2969538,
+            "lng":5.3760073
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette  Marseille Prado",
+        "Adresse":"Centre commercial PRADO, Allée Ray Grassi, ",
+        "Code postal":"13 008",
+        "Ville":"Marseille",
+        "Téléphone":"04 91 16 23 00",
+        "Geo":{
+            "lat":43.2701454,
+            "lng":5.3933681
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Metz",
+        "Adresse":"4, rue Winston Churchill",
+        "Code postal":"57 016",
+        "Ville":"Metz ",
+        "Téléphone":"03 87 38 60 60",
+        "Geo":{
+            "lat":49.1165447,
+            "lng":6.172619099999999
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Montpellier",
+        "Adresse":"Centre Commercial Le Polygone",
+        "Code postal":"34 045",
+        "Ville":"Montpellier",
+        "Téléphone":"04 67 64 83 00",
+        "Geo":{
+            "lat":43.6084583,
+            "lng":3.8847735
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Nantes Decré",
+        "Adresse":"2 à 20, rue de la Marne ",
+        "Code postal":"44 024",
+        "Ville":"Nantes ",
+        "Téléphone":"02 40 99 82 12",
+        "Geo":{
+            "lat":47.21620859999999,
+            "lng":-1.5537642
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Nice Cap3000",
+        "Adresse":"BP 126, quartier du lac",
+        "Code postal":"06 703",
+        "Ville":"St-Laurent du Var ",
+        "Téléphone":"04 93 14 82 12",
+        "Geo":{
+            "lat":43.6596876,
+            "lng":7.195204099999999
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Nice Massena",
+        "Adresse":"6, avenue Jean Médecin",
+        "Code postal":"06 007",
+        "Ville":"Nice ",
+        "Téléphone":"04 92 17 36 36",
+        "Geo":{
+            "lat":43.6987246,
+            "lng":7.269766700000001
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Rosny",
+        "Adresse":"C.C. ROSNY 2,\navenue du Général de Gaulle",
+        "Code postal":"93 117",
+        "Ville":"Rosny sous Bois ",
+        "Téléphone":"01 48 12 01 20",
+        "Geo":{
+            "lat":48.8844326,
+            "lng":2.477612
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":" Galeries Lafayette Strasbourg",
+        "Adresse":"34, rue du 22 novembre",
+        "Code postal":"67 000",
+        "Ville":"Strasbourg",
+        "Téléphone":"03 88 15 23 00",
+        "Geo":{
+            "lat":48.58245400000001,
+            "lng":7.745030799999999
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":" Galeries Lafayette Toulouse Lapeyrouse",
+        "Adresse":"4 à 8, rue Lapeyrouse",
+        "Code postal":"31 008",
+        "Ville":"Toulouse ",
+        "Téléphone":"05 34 45 98 98",
+        "Geo":{
+            "lat":43.6038369,
+            "lng":1.446307
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Amiens",
+        "Adresse":"12, rue des Trois Cailloux",
+        "Code postal":"80 010",
+        "Ville":"Amiens",
+        "Téléphone":"03 22 22 29 00",
+        "Geo":{
+            "lat":49.8924276,
+            "lng":2.2984481
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Angers",
+        "Adresse":"6, rue d'Alsace ",
+        "Code postal":"49 021",
+        "Ville":"Angers",
+        "Téléphone":"02 41 88 05 50",
+        "Geo":{
+            "lat":47.4704754,
+            "lng":-0.5512481
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Avignon",
+        "Adresse":"Avenue de la Croix Rouge",
+        "Code postal":"84 000",
+        "Ville":"Avignon",
+        "Téléphone":"04 90 88 91 05",
+        "Geo":{
+            "lat":43.9265903,
+            "lng":4.8362503
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Bayonne",
+        "Adresse":"28-30, rue Thiers",
+        "Code postal":"64 100",
+        "Ville":"Bayonne ",
+        "Téléphone":"05 59 25 65 40",
+        "Geo":{
+            "lat":43.4923216,
+            "lng":-1.4771277
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Besançon",
+        "Adresse":"44, rue des Granges",
+        "Code postal":"25 017",
+        "Ville":"Besançon ",
+        "Téléphone":"03 81 82 18 78",
+        "Geo":{
+            "lat":47.2377923,
+            "lng":6.0254202
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette  Biarritz",
+        "Adresse":"17, place Clémenceau",
+        "Code postal":"64 200",
+        "Ville":"Biarritz",
+        "Téléphone":"05 59 22 72 72",
+        "Geo":{
+            "lat":43.4823522,
+            "lng":-1.559911
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Caen",
+        "Adresse":"108, boulevard du Maréchal Leclerc",
+        "Code postal":"14 050",
+        "Ville":"Caen ",
+        "Téléphone":"02 31 39 31 00",
+        "Geo":{
+            "lat":49.1819565,
+            "lng":-0.3622136
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Cannes",
+        "Adresse":"6, rue Maréchal Foch",
+        "Code postal":"O6 400",
+        "Ville":"Cannes",
+        "Téléphone":"04 97 06 25 00",
+        "Geo":{
+            "lat":43.5530049,
+            "lng":7.019204599999999
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":" Galeries Lafayette Clermont Ferrand",
+        "Adresse":"25, place de Jaude",
+        "Code postal":"63 037",
+        "Ville":"Clermont Ferrand ",
+        "Téléphone":"04 73 93 82 55",
+        "Geo":{
+            "lat":45.776486,
+            "lng":3.0830207
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Dijon",
+        "Adresse":"41-49, rue de la Liberté ",
+        "Code postal":"21 022",
+        "Ville":"Dijon ",
+        "Téléphone":"03 80 44 82 12",
+        "Geo":{
+            "lat":47.3226853,
+            "lng":5.0374561
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Carré Senart",
+        "Adresse":"Rond Point du trait d'union Allée de l' avant-scène ",
+        "Code postal":"77 127",
+        "Ville":"Lieusaint ",
+        "Téléphone":"01 64 13 59 70",
+        "Geo":{
+            "lat":48.61568,
+            "lng":2.54423
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Le Mans",
+        "Adresse":"17-2,1 rue des Minimes",
+        "Code postal":"72 000",
+        "Ville":"Le Mans",
+        "Téléphone":"02 43 24 34 91",
+        "Geo":{
+            "lat":48.0034792,
+            "lng":0.1967746
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Limoges",
+        "Adresse":"6, rue Porte Tourny",
+        "Code postal":"87 011",
+        "Ville":"Limoges",
+        "Téléphone":"05 55 10 03 00",
+        "Geo":{
+            "lat":45.8317916,
+            "lng":1.2615394
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Orléans",
+        "Adresse":"6, rue Thiers",
+        "Code postal":"45 044",
+        "Ville":"Orléans",
+        "Téléphone":"02 38 54 24 40",
+        "Geo":{
+            "lat":47.8997846,
+            "lng":1.9052011
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Pau",
+        "Adresse":"14, cours bosquet",
+        "Code postal":"64 000",
+        "Ville":"Pau",
+        "Téléphone":"05 59 27 98 58",
+        "Geo":{
+            "lat":43.2982429,
+            "lng":-0.3658617
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Perpignan",
+        "Adresse":"1, place de la Résistance",
+        "Code postal":"66 004",
+        "Ville":"Perpignan ",
+        "Téléphone":"04 68 35 26 91",
+        "Geo":{
+            "lat":42.7008965,
+            "lng":2.8928682
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Reims",
+        "Adresse":"33-45, rue de Vesle",
+        "Code postal":"51 058",
+        "Ville":"Reims",
+        "Téléphone":"03 26 40 35 12",
+        "Geo":{
+            "lat":49.2534112,
+            "lng":4.0295657
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Rennes",
+        "Adresse":"rue de Rohan et quai Duguay Trouin",
+        "Code postal":"35 103",
+        "Ville":"Rennes ",
+        "Téléphone":"02 99 78 49 49",
+        "Geo":{
+            "lat":48.1101698,
+            "lng":-1.6802231
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Tours",
+        "Adresse":"77, rue Nationale",
+        "Code postal":"37 008",
+        "Ville":"Tours",
+        "Téléphone":"02 47 31 28 28",
+        "Geo":{
+            "lat":47.3904785,
+            "lng":0.6878774
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Agen",
+        "Adresse":"72, boulevard de la République",
+        "Code postal":"47 003",
+        "Ville":"Agen",
+        "Téléphone":"05 53 47 20 21",
+        "Geo":{
+            "lat":44.20486,
+            "lng":0.6194172
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Angoulême",
+        "Adresse":"10, rue de Goscinny",
+        "Code postal":"16 021",
+        "Ville":"Angoulême ",
+        "Téléphone":"05 45 92 43 00",
+        "Geo":{
+            "lat":45.6485189,
+            "lng":0.1613776
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Beauvais",
+        "Adresse":"2, rue des Jacobins ",
+        "Code postal":"60 000",
+        "Ville":"Beauvais ",
+        "Téléphone":"03 44 48 16 07",
+        "Geo":{
+            "lat":49.43097239999999,
+            "lng":2.0837834
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Belfort",
+        "Adresse":"24-34, faubourg de France",
+        "Code postal":"90 000",
+        "Ville":"Belfort",
+        "Téléphone":"03 84 21 63 45",
+        "Geo":{
+            "lat":47.6371136,
+            "lng":6.8560495
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Beziers",
+        "Adresse":"19, rue boieldieu",
+        "Code postal":"34 500",
+        "Ville":"Béziers",
+        "Téléphone":"04 67 28 13 85",
+        "Geo":{
+            "lat":43.3433736,
+            "lng":3.2171859
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Châlon-sur-Saône",
+        "Adresse":"17, boulevard de la République",
+        "Code postal":"71 100",
+        "Ville":"Chalon sur Saône",
+        "Téléphone":"03 85 48 01 39",
+        "Geo":{
+            "lat":46.7834893,
+            "lng":4.850337
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Chambery",
+        "Adresse":"19, boulevard de la Colonne",
+        "Code postal":"73 018",
+        "Ville":"Chambéry ",
+        "Téléphone":"04 79 33 76 09",
+        "Geo":{
+            "lat":45.5677052,
+            "lng":5.921075099999999
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Dax",
+        "Adresse":"19, rue Saint Vincent",
+        "Code postal":"40 108",
+        "Ville":"Dax",
+        "Téléphone":"05 58 74 72 65",
+        "Geo":{
+            "lat":43.7091281,
+            "lng":-1.0536568
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":" Galeries Lafayette La Roche-sur-Yon",
+        "Adresse":"18, rue Georges Clémenceau",
+        "Code postal":"85 005",
+        "Ville":"La Roche sur Yon",
+        "Téléphone":"02 51 62 22 24",
+        "Geo":{
+            "lat":46.67015079999999,
+            "lng":-1.4300802
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette La Rochelle",
+        "Adresse":"31-39, rue du Palais",
+        "Code postal":"17 000",
+        "Ville":"La Rochelle ",
+        "Téléphone":"05 46 41 27 33",
+        "Geo":{
+            "lat":46.15920060000001,
+            "lng":-1.153468
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Langon",
+        "Adresse":"5, place du Gal de Gaulle",
+        "Code postal":"33 210",
+        "Ville":"Langon",
+        "Téléphone":"05 57 98 01 40",
+        "Geo":{
+            "lat":44.552962,
+            "lng":-0.2461332
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Libourne",
+        "Adresse":"21, rue Gambetta",
+        "Code postal":"33 500",
+        "Ville":"Libourne",
+        "Téléphone":"05 57 74 14 72",
+        "Geo":{
+            "lat":44.9154792,
+            "lng":-0.2437072
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Lorient",
+        "Adresse":"10, place Alsace Lorraine",
+        "Code postal":"56 106",
+        "Ville":"Lorient ",
+        "Téléphone":"02 97 64 14 58",
+        "Geo":{
+            "lat":47.7492427,
+            "lng":-3.3610639
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Montauban",
+        "Adresse":"37, rue Béssières",
+        "Code postal":"82 000",
+        "Ville":"Montauban",
+        "Téléphone":"05 63 92 65 65",
+        "Geo":{
+            "lat":44.0173934,
+            "lng":1.3559818
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Niort",
+        "Adresse":"47, rue Victor Hugo",
+        "Code postal":"79 003",
+        "Ville":"Niort ",
+        "Téléphone":"05 49 24 41 23",
+        "Geo":{
+            "lat":46.324777,
+            "lng":-0.4616498000000001
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Saintes",
+        "Adresse":"1, cours National",
+        "Code postal":"17 102",
+        "Ville":"Saintes",
+        "Téléphone":"05 46 93 47 22",
+        "Geo":{
+            "lat":45.746883,
+            "lng":-0.6308412999999999
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Tarbes",
+        "Adresse":"28-30, rue du Maréchal Foch",
+        "Code postal":"65 001",
+        "Ville":"Tarbes",
+        "Téléphone":"05 62 44 08 20",
+        "Geo":{
+            "lat":43.2323593,
+            "lng":0.0772083
+        }
+    },
+    {
+        "Enseigne":"Galeries Lafayette ",
+        "Nom du PDV":"Galeries Lafayette Toulon",
+        "Adresse":"11, boulevard de Strasbourg",
+        "Code postal":"83 098",
+        "Ville":"Toulon ",
+        "Téléphone":"04 94 22 39 71",
+        "Geo":{
+            "lat":43.1250168,
+            "lng":5.931073
+        }
+    },
+    {
+        "Enseigne":"BHV",
+        "Nom du PDV":"BHV Rivoli",
+        "Adresse":"52, rue de Rivoli",
+        "Code postal":"75004",
+        "Ville":"Paris ",
+        "Téléphone":"09 77 40 14 00",
+        "Geo":{
+            "lat":48.8575615,
+            "lng":2.3531936
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Bastia MG",
+        "Adresse":"Avenue de la Libération",
+        "Code postal":"20600",
+        "Ville":" Bastia",
+        "Téléphone":"04 95 30 57 13",
+        "Geo":{
+            "lat":42.6821,
+            "lng":9.444137999999999
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Caserne de Bonne",
+        "Adresse":"15, rue Marceau",
+        "Code postal":"38000",
+        "Ville":"Grenoble ",
+        "Téléphone":"04 38 03 86 10",
+        "Geo":{
+            "lat":45.183334,
+            "lng":5.721649999999999
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Levallois MG",
+        "Adresse":"20, rue Gabriel Péri",
+        "Code postal":"92300",
+        "Ville":" Levallois Perret",
+        "Téléphone":"01 47 57 67 95",
+        "Geo":{
+            "lat":48.8904781,
+            "lng":2.2893249
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Levallois Pompidou",
+        "Adresse":"12-14, place Georges Pompidou",
+        "Code postal":"92300",
+        "Ville":"Levallois",
+        "Téléphone":"04 47 57 19 15",
+        "Geo":{
+            "lat":48.8985864,
+            "lng":2.2822819
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Lille Tanneur",
+        "Adresse":"Centre Cial Les Tanneurs, \n80, rue de Paris",
+        "Code postal":"59800",
+        "Ville":" Lille",
+        "Téléphone":"03 28 82 92 20",
+        "Geo":{
+            "lat":50.63491550000001,
+            "lng":3.0662624
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":" Monoprix Aix Mirabeau",
+        "Adresse":"27, cours Mirabeau",
+        "Code postal":"13100",
+        "Ville":" Aix en Provence",
+        "Téléphone":"04 42 91 31 40",
+        "Geo":{
+            "lat":43.5270677,
+            "lng":5.4483177
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":" Monoprix Annecy Courier",
+        "Adresse":"65, rue Carnot",
+        "Code postal":"74000",
+        "Ville":" Annecy ",
+        "Téléphone":"04 50 88 11 11",
+        "Geo":{
+            "lat":45.9042727,
+            "lng":6.1233971
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":" Monoprix Arcueil La Vache Noire ",
+        "Adresse":"CC la Vache Noire Place de la Vache Noire",
+        "Code postal":"94110",
+        "Ville":" Arcueil",
+        "Téléphone":"01 49 85 83 30",
+        "Geo":{
+            "lat":48.8113427,
+            "lng":2.3291005
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Asnières",
+        "Adresse":"6, place des Victoires",
+        "Code postal":"92600",
+        "Ville":"Asnières",
+        "Téléphone":"01 47 93 01 50",
+        "Geo":{
+            "lat":48.91030929999999,
+            "lng":2.2909808
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Beaugrenelle",
+        "Adresse":"19, rue Linois",
+        "Code postal":"75015",
+        "Ville":" Paris",
+        "Téléphone":"01 45 75 02 40",
+        "Geo":{
+            "lat":48.8481482,
+            "lng":2.2839813
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Belleville",
+        "Adresse":"133, rue de Belleville",
+        "Code postal":"75019",
+        "Ville":" Paris",
+        "Téléphone":"01 42 39 95 37",
+        "Geo":{
+            "lat":48.8751932,
+            "lng":2.3883578
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Bièvre",
+        "Adresse":"42, rue Daviel",
+        "Code postal":"75013",
+        "Ville":" Paris",
+        "Téléphone":"01 45 80 75 90",
+        "Geo":{
+            "lat":48.8288401,
+            "lng":2.3433813
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Boulogne",
+        "Adresse":"187, boulevard Jean Jaurès",
+        "Code postal":"92100",
+        "Ville":" Boulogne Billancourt",
+        "Téléphone":"01 46 03 25 09",
+        "Geo":{
+            "lat":48.8343629,
+            "lng":2.243382
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Bourg La Reine",
+        "Adresse":"8, rue René Roeckel",
+        "Code postal":"92340",
+        "Ville":"Bourg La Reine",
+        "Téléphone":"01 46 61 31 60",
+        "Geo":{
+            "lat":48.7799176,
+            "lng":2.314128
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Bruyères",
+        "Adresse":"31, rue Edith Cavell",
+        "Code postal":"92400",
+        "Ville":"Courbevoie",
+        "Téléphone":"01 43 33 23 42",
+        "Geo":{
+            "lat":48.9027985,
+            "lng":2.2682898
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Caen",
+        "Adresse":"45-49, boulevard Leclerc",
+        "Code postal":"14011",
+        "Ville":" Caen",
+        "Téléphone":"02 31 50 28 28",
+        "Geo":{
+            "lat":49.1808622,
+            "lng":-0.3621969
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Caumartin",
+        "Adresse":"56, rue de Caumartin",
+        "Code postal":"75009",
+        "Ville":"Paris",
+        "Téléphone":"01 44 53 79 79",
+        "Geo":{
+            "lat":48.8743978,
+            "lng":2.3290041
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Champs Elysées ",
+        "Adresse":"52, avenue des Champs Elysées",
+        "Code postal":"75008",
+        "Ville":"Paris",
+        "Téléphone":"01 53 77 65 65",
+        "Geo":{
+            "lat":48.87051,
+            "lng":2.306566
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Charenton",
+        "Adresse":"75, rue de Paris",
+        "Code postal":"94220",
+        "Ville":"Charenton-le-Pont",
+        "Téléphone":"01 43 68 14 55",
+        "Geo":{
+            "lat":48.821058,
+            "lng":2.4137608
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix CNIT La Défense",
+        "Adresse":"2, place de la Défense  BP326",
+        "Code postal":"92800",
+        "Ville":"Puteaux",
+        "Téléphone":"01 49 06 46 50",
+        "Geo":{
+            "lat":48.8926267,
+            "lng":2.239467
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Colombes",
+        "Adresse":"85, rue Saint Denis",
+        "Code postal":"92700",
+        "Ville":"Colombes",
+        "Téléphone":"01 47 81 40 56",
+        "Geo":{
+            "lat":48.9237987,
+            "lng":2.2530947
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Commerce",
+        "Adresse":"2, rue du Commerce",
+        "Code postal":"75015",
+        "Ville":"Paris",
+        "Téléphone":"01 45 79 94 86",
+        "Geo":{
+            "lat":48.8489259,
+            "lng":2.2975188
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Croises Laroche",
+        "Adresse":"1002, avenue République",
+        "Code postal":"59700",
+        "Ville":"Marcq-en-Barœul",
+        "Téléphone":"03 20 99 97 50",
+        "Geo":{
+            "lat":50.663933,
+            "lng":3.102546
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":" Monoprix Croix Rousse",
+        "Adresse":"7, rue de Cuire",
+        "Code postal":"69004",
+        "Ville":" Lyon",
+        "Téléphone":"04 78 27 01 67",
+        "Geo":{
+            "lat":45.7761075,
+            "lng":4.8300709
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Dijon",
+        "Adresse":"11-13, rue Piron",
+        "Code postal":"21000",
+        "Ville":" Dijon",
+        "Téléphone":"03 80 30 26 60",
+        "Geo":{
+            "lat":47.3208811,
+            "lng":5.0378254
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Dunkerque",
+        "Adresse":"9, place de la République",
+        "Code postal":"59140",
+        "Ville":"Dunkerque",
+        "Téléphone":"03 28 59 01 11",
+        "Geo":{
+            "lat":51.0325517,
+            "lng":2.3758537
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Fontainebleau",
+        "Adresse":"58, rue Grande",
+        "Code postal":"77300",
+        "Ville":"Fontainebleau",
+        "Téléphone":"01 64 22 20 96",
+        "Geo":{
+            "lat":48.4053104,
+            "lng":2.7017909
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Fontenay-sous-Bois",
+        "Adresse":"96, rue Dalayrac",
+        "Code postal":"94120",
+        "Ville":"Fontenay-sous-Bois",
+        "Téléphone":"01 48 75 30 21",
+        "Geo":{
+            "lat":48.8493228,
+            "lng":2.4588312
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Forum des Halles",
+        "Adresse":"101, Porte Berger Forum des Halles",
+        "Code postal":"75001",
+        "Ville":"Paris",
+        "Téléphone":"01 40 41 18 50",
+        "Geo":{
+            "lat":48.861857,
+            "lng":2.346848
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Gobelins PN",
+        "Adresse":"13-15, avenue des Gobelins",
+        "Code postal":"75005",
+        "Ville":"Paris",
+        "Téléphone":"01 43 36 04 92",
+        "Geo":{
+            "lat":48.8376826,
+            "lng":2.3515522
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix grenoble Lafayette",
+        "Adresse":"22, rue Lafayette",
+        "Code postal":"38000",
+        "Ville":"Grenoble ",
+        "Téléphone":"04 76 54 33 64",
+        "Geo":{
+            "lat":45.1903117,
+            "lng":5.7286053
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Issy Les Moulineaux",
+        "Adresse":"57, rue du Général Leclerc",
+        "Code postal":"92130",
+        "Ville":"Issy Les Moulineaux",
+        "Téléphone":"01 46 44 44 13",
+        "Geo":{
+            "lat":48.8242,
+            "lng":2.274082
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Italie",
+        "Adresse":"83, avenue d'Italie",
+        "Code postal":"75013",
+        "Ville":"Paris",
+        "Téléphone":"01 45 85 70 58",
+        "Geo":{
+            "lat":48.8241966,
+            "lng":2.3584567
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Le Havre",
+        "Adresse":"22, rue Casimir Perrier",
+        "Code postal":"76600",
+        "Ville":" Le Havre",
+        "Téléphone":"02 32 74 67 00",
+        "Geo":{
+            "lat":49.4958178,
+            "lng":0.1116986
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Le Vesinet",
+        "Adresse":"5, place de l'Eglise",
+        "Code postal":"78110",
+        "Ville":"Le Vesinet",
+        "Téléphone":"01 39 76 35 21",
+        "Geo":{
+            "lat":48.8927003,
+            "lng":2.134032
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Marseille Terrasses",
+        "Adresse":"Centre Commercial Les Terrasses du Port, \nPlace de la Joliette  ",
+        "Code postal":"13003",
+        "Ville":"Marseille",
+        "Téléphone":"04 96 11 63 20",
+        "Geo":{
+            "lat":43.3067576,
+            "lng":5.364598
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Meudon",
+        "Adresse":"41, rue de la République",
+        "Code postal":"92190",
+        "Ville":"Meudon",
+        "Téléphone":"01 46 26 08 30 ",
+        "Geo":{
+            "lat":48.8074502,
+            "lng":2.2367068
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Montparnasse",
+        "Adresse":"31, rue du Départ",
+        "Code postal":"75014",
+        "Ville":"Paris",
+        "Téléphone":"01 43 20 69 30",
+        "Geo":{
+            "lat":48.8413253,
+            "lng":2.3222751
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":" Monoprix Nancy Saint Sébastien",
+        "Adresse":"Centre Cial St Sébastien",
+        "Code postal":"54000",
+        "Ville":" Nancy",
+        "Téléphone":"03 83 17 78 70",
+        "Geo":{
+            "lat":48.6881513,
+            "lng":6.180580700000001
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Nice Cimiez",
+        "Adresse":"8, avenue Flirey",
+        "Code postal":"06000",
+        "Ville":"Nice ",
+        "Téléphone":"04 93 81 20 62",
+        "Geo":{
+            "lat":43.7218841,
+            "lng":7.2756545
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Nice Victoire",
+        "Adresse":"42, avenue Jean Médecin BP 68",
+        "Code postal":"06012",
+        "Ville":"Nice ",
+        "Téléphone":"04 92 47 72 62",
+        "Geo":{
+            "lat":43.7028439,
+            "lng":7.2669228
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Opéra ",
+        "Adresse":"21, avenue de l'Opéra",
+        "Code postal":"75001",
+        "Ville":"Paris",
+        "Téléphone":"01 42 61 78 08",
+        "Geo":{
+            "lat":48.8664005,
+            "lng":2.3338523
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":" Monoprix Parly 2",
+        "Adresse":"Centre Cial Parly II",
+        "Code postal":"78150",
+        "Ville":"Le Chesnay-Rocquencourt",
+        "Téléphone":"01 39 54 33 22",
+        "Geo":{
+            "lat":48.8280252,
+            "lng":2.1160855
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":" Monoprix Passy PN ",
+        "Adresse":"18, rue de Passy",
+        "Code postal":"75016",
+        "Ville":"Paris",
+        "Téléphone":"01 45 20 17 52",
+        "Geo":{
+            "lat":48.8582983,
+            "lng":2.282185
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Perigueux ",
+        "Adresse":"10, place Bugeaud BP 5055",
+        "Code postal":"24000",
+        "Ville":"Perigueux",
+        "Téléphone":"05 53 09 75 25",
+        "Geo":{
+            "lat":45.183416,
+            "lng":0.7183459999999999
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Picpus",
+        "Adresse":"237, avenue Daumesnil",
+        "Code postal":"75012",
+        "Ville":"Paris",
+        "Téléphone":"01 43 43 40 03",
+        "Geo":{
+            "lat":48.8378878,
+            "lng":2.4010349
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Poitiers",
+        "Adresse":"CC des Cordelier, \nrue des grandes écoles",
+        "Code postal":"86000",
+        "Ville":"Poitiers",
+        "Téléphone":"05 49 41 41 97",
+        "Geo":{
+            "lat":46.581838,
+            "lng":0.3421778
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":" Monoprix Porte de Chatillon ",
+        "Adresse":"6-12, avenue Pierre Brossolette",
+        "Code postal":"92240",
+        "Ville":"Malakoff",
+        "Téléphone":"01 46 56 38 40",
+        "Geo":{
+            "lat":48.82195369999999,
+            "lng":2.3125176
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix République",
+        "Adresse":"164, rue du Temple",
+        "Code postal":"75003",
+        "Ville":"Paris",
+        "Téléphone":"01 48 87 46 60",
+        "Geo":{
+            "lat":48.8662081,
+            "lng":2.3614761
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Roquette",
+        "Adresse":"166, avenue Ledru Rollin",
+        "Code postal":"75011",
+        "Ville":"Paris",
+        "Téléphone":"01 43 79 66 96",
+        "Geo":{
+            "lat":48.8566932,
+            "lng":2.3794244
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":" Monoprix Rueil Malmaison",
+        "Adresse":"50, rue du Château",
+        "Code postal":"92500",
+        "Ville":"Rueil-Malmaison",
+        "Téléphone":"01 57 61 43 20",
+        "Geo":{
+            "lat":48.873866,
+            "lng":2.1809576
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Sablons",
+        "Adresse":"72, avenue Charles de Gaulle",
+        "Code postal":"92200",
+        "Ville":"Neuilly-sur-Seine",
+        "Téléphone":"01 47 45 24 42",
+        "Geo":{
+            "lat":48.88199849999999,
+            "lng":2.271322000000001
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":" Monoprix Sébastopol",
+        "Adresse":"95, boulevard Sébastopol",
+        "Code postal":"75002",
+        "Ville":"Paris",
+        "Téléphone":"01 42 33 36 15",
+        "Geo":{
+            "lat":48.8656132,
+            "lng":2.3519
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Saint Antoine",
+        "Adresse":"99, faubourg Saint Antoine",
+        "Code postal":"75011",
+        "Ville":"Paris",
+        "Téléphone":"01 43 07 59 40",
+        "Geo":{
+            "lat":48.8515023,
+            "lng":2.3759813
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Saint Augustin",
+        "Adresse":"47, boulevard Malesherbes",
+        "Code postal":"75008",
+        "Ville":"Paris",
+        "Téléphone":"01 40 98 00 30",
+        "Geo":{
+            "lat":48.8744068,
+            "lng":2.3198596
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Saint Mandé II",
+        "Adresse":"5-7, avenue Charles de Gaulle",
+        "Code postal":"94160",
+        "Ville":"Saint Mandé",
+        "Téléphone":"01 43 65 91 75",
+        "Geo":{
+            "lat":48.84283199999999,
+            "lng":2.4178639
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Saint Michel",
+        "Adresse":"24, boulevard St Michel",
+        "Code postal":"75006",
+        "Ville":"Paris",
+        "Téléphone":"01 44 32 05 00",
+        "Geo":{
+            "lat":48.8509654,
+            "lng":2.3426275
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Ternes",
+        "Adresse":"25, avenue des Ternes",
+        "Code postal":"75017",
+        "Ville":"Paris",
+        "Téléphone":"01 43 80 43 76",
+        "Geo":{
+            "lat":48.8780636,
+            "lng":2.2952305
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Toits de Boulogne",
+        "Adresse":"130-140, route de la Reine",
+        "Code postal":"92100",
+        "Ville":"Boulogne-Billancourt",
+        "Téléphone":"01 41 22 99 60",
+        "Geo":{
+            "lat":48.8404827,
+            "lng":2.2332713
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Toulouse",
+        "Adresse":"39, rue Alsace Lorraine",
+        "Code postal":"31000",
+        "Ville":"Toulouse ",
+        "Téléphone":"05 34 44 17 30",
+        "Geo":{
+            "lat":43.6034892,
+            "lng":1.4453946
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":" Monoprix Uni Poteaux",
+        "Adresse":"32, rue du Poteau",
+        "Code postal":"75018",
+        "Ville":"Paris",
+        "Téléphone":"01 42 62 22 01",
+        "Geo":{
+            "lat":48.8942398,
+            "lng":2.3421943
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Vaugirard",
+        "Adresse":"340, rue Vaugirard",
+        "Code postal":"75015",
+        "Ville":"Paris",
+        "Téléphone":"01 56 23 90 60",
+        "Geo":{
+            "lat":48.8367929,
+            "lng":2.2949411
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":" Monoprix Versailles",
+        "Adresse":"5, rue Clémenceau",
+        "Code postal":"78000",
+        "Ville":"Versailles",
+        "Téléphone":"01 39 51 78 20",
+        "Geo":{
+            "lat":48.8040992,
+            "lng":2.1312583
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Bastia SMG",
+        "Adresse":"Avenue de la Libération",
+        "Code postal":"20600",
+        "Ville":"Bastia",
+        "Téléphone":"04 95 30 57 13",
+        "Geo":{
+            "lat":42.6821,
+            "lng":9.444137999999999
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Nation",
+        "Adresse":"20, boulevard de Charonne",
+        "Code postal":"75020",
+        "Ville":"Paris",
+        "Téléphone":"01 43 73 17 59",
+        "Geo":{
+            "lat":48.84950380000001,
+            "lng":2.3998628
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monoprix Reims",
+        "Adresse":"34, rue Jeanne d'Arc",
+        "Code postal":"51100",
+        "Ville":"Reims",
+        "Téléphone":"03 26 79 15 30",
+        "Geo":{
+            "lat":49.2551237,
+            "lng":4.0250755
+        }
+    },
+    {
+        "Enseigne":"Monoprix",
+        "Nom du PDV":"Monop' Beauty Abbesses",
+        "Adresse":"28, rue des Abbesses",
+        "Code postal":"75018",
+        "Ville":"Paris",
+        "Téléphone":"01 87 89 72 44",
+        "Geo":{
+            "lat":48.8850649,
+            "lng":2.3373544
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Archives ",
+        "Adresse":"28, rue des Archives",
+        "Code postal":"75004",
+        "Ville":"Paris",
+        "Téléphone":"01 42 78 30 86",
+        "Geo":{
+            "lat":48.8582357,
+            "lng":2.3552367
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Batignolles",
+        "Adresse":"98, boulevard des Batignolles",
+        "Code postal":"75017",
+        "Ville":"Paris",
+        "Téléphone":"01 42 93 10 24",
+        "Geo":{
+            "lat":48.8816178,
+            "lng":2.3170404
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Caulaincourt",
+        "Adresse":"107, rue Caulaincourt",
+        "Code postal":"75018",
+        "Ville":"Paris",
+        "Téléphone":"01 42 55 00 90",
+        "Geo":{
+            "lat":48.8897623,
+            "lng":2.339394
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Cler",
+        "Adresse":"30, rue Cler",
+        "Code postal":"75007",
+        "Ville":"Paris",
+        "Téléphone":"01 45 56 08 95",
+        "Geo":{
+            "lat":48.8571815,
+            "lng":2.3060285
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio  Lamartine",
+        "Adresse":"54, rue Lamartine",
+        "Code postal":"75009",
+        "Ville":"Paris",
+        "Téléphone":"01 49 70 07 47",
+        "Geo":{
+            "lat":48.8766834,
+            "lng":2.3400206
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Lepic",
+        "Adresse":"32, rue Lepic",
+        "Code postal":"75018",
+        "Ville":"Paris",
+        "Téléphone":"01 46 06 22 27",
+        "Geo":{
+            "lat":48.8855939,
+            "lng":2.3347789
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Nantes",
+        "Adresse":"9, rue contrescarpe  ",
+        "Code postal":"44000",
+        "Ville":"Nantes",
+        "Téléphone":"02 51 17 74 52‬",
+        "Geo":{
+            "lat":47.21481379999999,
+            "lng":-1.5595442
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Raspail",
+        "Adresse":"126, boulevard Raspail",
+        "Code postal":"75006",
+        "Ville":"Paris",
+        "Téléphone":"01 40 49 09 06",
+        "Geo":{
+            "lat":48.8435456,
+            "lng":2.3289314
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Poteau",
+        "Adresse":"35, rue du Poteau",
+        "Code postal":"75018",
+        "Ville":"Paris",
+        "Téléphone":"01 46 06 72 66",
+        "Geo":{
+            "lat":48.8940786,
+            "lng":2.3414117
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Sèvres",
+        "Adresse":"91, rue de Sèvres",
+        "Code postal":"75006",
+        "Ville":"Paris",
+        "Téléphone":"01 43 35 29 36",
+        "Geo":{
+            "lat":48.849061,
+            "lng":2.3221185
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Saint Antoine",
+        "Adresse":"52, rue Saint Antoine ",
+        "Code postal":"75004",
+        "Ville":"Paris",
+        "Téléphone":"01 48 87 87 50",
+        "Geo":{
+            "lat":48.8542803,
+            "lng":2.3642107
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Saint Martin",
+        "Adresse":"207, rue du Faubourg St-Martin ",
+        "Code postal":"75010",
+        "Ville":"Paris",
+        "Téléphone":"01 40 37 32 12",
+        "Geo":{
+            "lat":48.8802637,
+            "lng":2.3639066
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Vaugirard",
+        "Adresse":"296, rue de Vaugirard",
+        "Code postal":"75015",
+        "Ville":"Paris",
+        "Téléphone":"01 42 72 33 38",
+        "Geo":{
+            "lat":48.8382899,
+            "lng":2.2981312
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Bordeaux",
+        "Adresse":"28, rue du Pas Saint Georges",
+        "Code postal":"33000",
+        "Ville":"Bordeaux",
+        "Téléphone":"05 57 99 96 89",
+        "Geo":{
+            "lat":44.8394918,
+            "lng":-0.5718329999999999
+        }
+    },
+    {
+        "Enseigne":"MADEMOISELLE BIO",
+        "Nom du PDV":"Mademoiselle Bio Oberkampf",
+        "Adresse":"43, rue Oberkampf",
+        "Code postal":"75011",
+        "Ville":"Paris",
+        "Téléphone":"01 87 03 92 99",
+        "Geo":{
+            "lat":48.8645674,
+            "lng":2.3717946
+        }
+    },
+    {
+        "Nom du PDV":"Anecdotes ",
+        "Adresse":"119, boulevard de la République",
+        "Code postal":"17340",
+        "Ville":"Châtelaillon-Plage",
+        "Téléphone":"09 81 15 40 40",
+        "Geo":{
+            "lat":46.0755851,
+            "lng":-1.0910108
+        }
+    },
+    {
+        "Nom du PDV":"Après la pluie",
+        "Adresse":"20, rue Masaryk",
+        "Code postal":"69009",
+        "Ville":"Lyon ",
+        "Téléphone":"04 28 29 93 20",
+        "Geo":{
+            "lat":45.779092,
+            "lng":4.8054875
+        }
+    },
+    {
+        "Nom du PDV":"Beauty Sisters",
+        "Adresse":"6, cours Michel Montaigne",
+        "Code postal":"24000",
+        "Ville":"PÉRIGUEUX",
+        "Téléphone":"05 57 30 14 32",
+        "Geo":{
+            "lat":45.1841452,
+            "lng":0.7180951999999999
+        }
+    },
+  	{
+        "Nom du PDV":"Love Jungle",
+        "Adresse":"44 Rue Leon Gambetta",
+        "Code postal":"62000",
+        "Ville":"Arras",
+        "Téléphone":"06 75 68 02 00",
+        "Geo":{
+            "lat":50.289001,
+            "lng":2.7759133
+        }
+    },
+    {
+        "Nom du PDV":"Biaurea",
+        "Adresse":"21, rue Victor Hugo ",
+        "Code postal":"64100",
+        "Ville":"Bayonne",
+        "Téléphone":"09 87 78 54 54",
+        "Geo":{
+            "lat":43.4914213,
+            "lng":-1.4749876
+        }
+    },
+    {
+        "Nom du PDV":"Chez Simonne",
+        "Adresse":"7, rue de Rohan ",
+        "Code postal":"22000",
+        "Ville":"St-Brieuc",
+        "Téléphone":"02 96 72 98 40",
+        "Geo":{
+            "lat":48.5134693,
+            "lng":-2.7626225
+        }
+    },
+    {
+        "Nom du PDV":"Crusoe Institut",
+        "Adresse":"53, avenue François Mitterand",
+        "Code postal":"72000",
+        "Ville":"Le Mans",
+        "Téléphone":"02 43 77 12 17",
+        "Geo":{
+            "lat":48.00326829999999,
+            "lng":0.1996697
+        }
+    },
+    {
+        "Nom du PDV":"Dupont Dupont store",
+        "Adresse":"4 bis, rue de la poste ",
+        "Code postal":"74000",
+        "Ville":"Annecy",
+        "Téléphone":"06 22 25 28 39 ",
+        "Geo":{
+            "lat":45.900537,
+            "lng":6.123438999999999
+        }
+    },
+    {
+        "Nom du PDV":"Rose Cartel",
+        "Adresse":"10, rue de Picardie",
+        "Code postal":"75003",
+        "Ville":"Paris",
+        "Téléphone":"01 45 35 27 41",
+        "Geo":{
+            "lat":48.8634463,
+            "lng":2.3624881
+        }
+    },
+    {
+        "Nom du PDV":"Institut Grain de Beauté",
+        "Adresse":"3, rue de la Liberté",
+        "Code postal":"67110",
+        "Ville":"Reichshoffen",
+        "Téléphone":"03 88 80 82 83",
+        "Geo":{
+            "lat":48.93249729999999,
+            "lng":7.6639188
+        }
+    },
+    {
+        "Nom du PDV":"Institut SENSO",
+        "Adresse":"23, rue du 8 Mai 1945",
+        "Code postal":"71240",
+        "Ville":"Varennes le Grand",
+        "Téléphone":"03 85 41 45 05",
+        "Geo":{
+            "lat":46.7113845,
+            "lng":4.8759187
+        }
+    },
+  	{
+        "Nom du PDV":"TRYMEFIRST",
+        "Adresse":"Prälat-Wellenhofer-Str 21",
+        "Code postal":"81377",
+        "Ville":"München ",
+        "Téléphone":"0049 17 63 03 35 0 22",
+        "Geo":{
+            "lat":48.1068889429927,
+            "lng":11.474180369322625
+        }
+    },
+    {
+        "Nom du PDV":"Le Corner de Sophie",
+        "Adresse":"2, rue Champ Lacombe",
+        "Code postal":"64200",
+        "Ville":"Biarritz",
+        "Téléphone":"05 59 23 70 25",
+        "Geo":{
+            "lat":43.4802112,
+            "lng":-1.5634923
+        }
+    },
+    {
+        "Enseigne":"Le Drugstore Parisien",
+        "Nom du PDV":"Le Drugstore Parisien Antin",
+        "Adresse":"66, rue de la Chaussée d'Antin",
+        "Code postal":"75009",
+        "Ville":"Paris",
+        "Téléphone":"01 78 68 08 37",
+        "Geo":{
+            "lat":48.875752,
+            "lng":2.332256
+        }
+    },
+   	{
+        "Enseigne":"Institut de SPA",
+        "Nom du PDV":"Les Fées Détente",
+        "Adresse":"15 rue Arkose",
+        "Code postal":"43700",
+        "Ville":"Blavozy",
+        "Téléphone":"04 43 07 64 83",
+        "Geo":{
+            "lat":45.08697869600891,
+            "lng":3.9446850158459767
+        }
+    },
+    {
+        "Enseigne":"Le Drugstore Parisien",
+        "Nom du PDV":"Le Drugstore Parisien Saint Lazare",
+        "Adresse":"17, 1 cour du Havre - CC St Lazare",
+        "Code postal":"75008",
+        "Ville":"Paris",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":48.8762517,
+            "lng":2.3252828
+        }
+    },
+    {
+        "Nom du PDV":"Le Quotidien Concept Store",
+        "Adresse":"14, rue Baldeyrou",
+        "Code postal":"15000",
+        "Ville":"Aurillac",
+        "Téléphone":"04 71 47 93 20",
+        "Geo":{
+            "lat":44.92796800000001,
+            "lng":2.445909
+        }
+    },
+    {
+        "Nom du PDV":"Les Beautés Bio",
+        "Adresse":"146, boulevard de Bazeilles",
+        "Code postal":"83480",
+        "Ville":"Puget-sur-Argens",
+        "Téléphone":"04 94 49 52 14",
+        "Geo":{
+            "lat":43.4521927,
+            "lng":6.6934271
+        }
+    },
+    {
+        "Nom du PDV":"Ma Bulle de Beauté",
+        "Adresse":"21, rue de l'Eglise ",
+        "Code postal":"68140",
+        "Ville":"Griesbach-Au-Val",
+        "Téléphone":"06 31 89 31 00",
+        "Geo":{
+            "lat":48.0357711,
+            "lng":7.1720721
+        }
+    },
+    {
+        "Nom du PDV":"Maka Stuff",
+        "Adresse":"18, rue Maubec",
+        "Code postal":"33210",
+        "Ville":"Langon",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":44.5544973,
+            "lng":-0.2459957
+        }
+    },
+    {
+        "Nom du PDV":"Meshi mushki",
+        "Adresse":"3 bis, rue Saint-Germain",
+        "Code postal":"27000",
+        "Ville":"Évreux",
+        "Téléphone":"02 32 60 16 90",
+        "Geo":{
+            "lat":49.0195055,
+            "lng":1.1417579
+        }
+    },
+    {
+        "Nom du PDV":"MOKO Concept Store ",
+        "Adresse":"29, rue Colbert  ",
+        "Code postal":"37000",
+        "Ville":"Tours",
+        "Téléphone":"02 47 71 93 72",
+        "Geo":{
+            "lat":47.3954969,
+            "lng":0.6881465
+        }
+    },
+    {
+        "Nom du PDV":"Pearl Spa",
+        "Adresse":"15 bis, rue Pierre et Marie Curie ",
+        "Code postal":"22590",
+        "Ville":"Pordic",
+        "Téléphone":"02 96 94 21 47",
+        "Geo":{
+            "lat":48.559002,
+            "lng":-2.8097828
+        }
+    },
+    {
+        "Enseigne":"Pharmacie",
+        "Nom du PDV":"Pharmacie de l'Olivier",
+        "Adresse":"170, rue Fontenay",
+        "Code postal":"94300",
+        "Ville":"Vincennes",
+        "Téléphone":"01 43 28 01 20",
+        "Geo":{
+            "lat":48.848731,
+            "lng":2.4349262
+        }
+    },
+    {
+        "Enseigne":"Pharmacie",
+        "Nom du PDV":"Pharmacie de la Gare ",
+        "Adresse":"1, place Fulgence Bienvenue ",
+        "Code postal":"77600",
+        "Ville":"Sussy Saint Georges",
+        "Téléphone":"01 64 66 90 07 ",
+        "Geo":{
+            "lat":48.8367284,
+            "lng":2.708453
+        }
+    },
+    {
+        "Enseigne":"Pharmacie",
+        "Nom du PDV":"Pharmacie de la Mairie",
+        "Adresse":"43, avenue Georges Dumas ",
+        "Code postal":"87000",
+        "Ville":"Limoges",
+        "Téléphone":"05 55 34 20 54",
+        "Geo":{
+            "lat":45.8265265,
+            "lng":1.2642656
+        }
+    },
+    {
+        "Enseigne":"Pharmacie",
+        "Nom du PDV":"Pharmacie de la Poste",
+        "Adresse":"34, rue du Maréchal Foch ",
+        "Code postal":"78110",
+        "Ville":"Le Vésinet",
+        "Téléphone":"01 39 76 16 91",
+        "Geo":{
+            "lat":48.8935228,
+            "lng":2.135359
+        }
+    },
+    {
+        "Enseigne":"Pharmacie",
+        "Nom du PDV":"Pharmacie de la Soie",
+        "Adresse":"9, rue Belfort ",
+        "Code postal":"69004",
+        "Ville":"Lyon ",
+        "Téléphone":"04 78 28 38 45",
+        "Geo":{
+            "lat":45.7763177,
+            "lng":4.8347604
+        }
+    },
+    {
+        "Enseigne":"Pharmacie",
+        "Nom du PDV":"Pharmacie Delapierre",
+        "Adresse":"4, place du Général de Gaulle",
+        "Code postal":"59840",
+        "Ville":"Pérenchies",
+        "Téléphone":"03 20 08 71 60",
+        "Geo":{
+            "lat":50.6679888,
+            "lng":2.9736641
+        }
+    },
+    {
+        "Enseigne":"Institut de beauté",
+        "Nom du PDV":"Ivanie SPA",
+        "Adresse":"Domaine de la jenny route de la jenny",
+        "Code postal":"33680",
+        "Ville":"Pérenchies",
+        "Téléphone":"03 20 08 71 60",
+        "Geo":{
+          "lat":44.847593,
+            "lng":-1.213130
+        }
+    },
+    {
+        "Enseigne":"Pharmacie",
+        "Nom du PDV":"Pharmacie des Bois Blancs",
+        "Adresse":"136, avenue de Dunkerque",
+        "Code postal":"59000",
+        "Ville":"Lille",
+        "Téléphone":"03 20 92 56 17",
+        "Geo":{
+            "lat":50.6344457,
+            "lng":3.0306273
+        }
+    },
+    {
+        "Enseigne":"Pharmacie",
+        "Nom du PDV":"Pharmacie des Lumières",
+        "Adresse":"10b, avenue James de Rothschild",
+        "Code postal":"77164",
+        "Ville":"Ferrières-en-Brie",
+        "Téléphone":"01 60 03 48 03",
+        "Geo":{
+            "lat":48.8272337,
+            "lng":2.704038
+        }
+    },
+    {
+        "Enseigne":"Pharmacie",
+        "Nom du PDV":"Pharmacie Henri IV",
+        "Adresse":"27 Boulevard Henri IV",
+        "Code postal":"75004",
+        "Ville":"Paris",
+        "Téléphone":"01 48 87 74 47",
+        "Geo":{
+            "lat":48.8519985,
+            "lng":2.3647948
+        }
+    },
+    {
+        "Enseigne":"Pharmacie",
+        "Nom du PDV":"Pharmacie La Cantarelle",
+        "Adresse":"548, avenue Maréchal de Lattre de Tassigny",
+        "Code postal":"83140",
+        "Ville":"Six-Fours-les-Plages",
+        "Téléphone":"04 94 07 11 71",
+        "Geo":{
+            "lat":43.0943316,
+            "lng":5.8377401
+        }
+    },
+    {
+        "Enseigne":"Pharmacie",
+        "Nom du PDV":"Pharmacie Madeleine",
+        "Adresse":"16, rue du Faubourg Madeleine",
+        "Code postal":"21200",
+        "Ville":"Beaune",
+        "Téléphone":"03 80 22 13 33",
+        "Geo":{
+            "lat":47.02121,
+            "lng":4.8411705
+        }
+    },
+    {
+        "Enseigne":"Pharmacie",
+        "Nom du PDV":"Pharmacie Mozart",
+        "Adresse":"14, avenue Mozart",
+        "Code postal":"75016",
+        "Ville":"Paris",
+        "Téléphone":"01 45 27 38 17",
+        "Geo":{
+            "lat":48.8572865,
+            "lng":2.2726545
+        }
+    },
+    {
+        "Nom du PDV":"Smallable",
+        "Adresse":"82, rue du Cherche-Midi",
+        "Code postal":"75006",
+        "Ville":"Paris",
+        "Téléphone":"09 67 87 29 43",
+        "Geo":{
+            "lat":48.8480195,
+            "lng":2.3233515
+        }
+    },
+    {
+        "Nom du PDV":"La Station par The Different Company",
+        "Adresse":"10, rue Ferdinand Duval ",
+        "Code postal":"75003",
+        "Ville":"Paris",
+        "Téléphone":"09 81 72 83 95",
+        "Geo":{
+            "lat":48.8562277,
+            "lng":2.3594039
+        }
+    },
+    {
+        "Nom du PDV":"Urban Institut / The place to be",
+        "Adresse":"18, rue Pierre Demours",
+        "Code postal":"75017",
+        "Ville":"Paris",
+        "Téléphone":"09 84 34 76 78",
+        "Geo":{
+            "lat":48.8805036,
+            "lng":2.2932761
+        }
+    },
+    {
+        "Nom du PDV":"Organic Epicerie ",
+        "Adresse":"145, rue des Moulins",
+        "Code postal":"74400",
+        "Ville":"Chamonix-Mont-Blanc",
+        "Téléphone":"04 50 47 22 43",
+        "Geo":{
+            "lat":45.92494380000001,
+            "lng":6.8703714
+        }
+    },
+    {
+        "Nom du PDV":"Super U Plascassier Parapharmacie",
+        "Adresse":"28, route de Valbonne ",
+        "Code postal":"06130",
+        "Ville":"Grasse",
+        "Téléphone":"04 93 40 57 00",
+        "Geo":{
+            "lat":43.63928569999999,
+            "lng":6.9789099
+        }
+    },
+    {
+        "Nom du PDV":"La Samaritaine",
+        "Adresse":"21, rue de la Monnaire",
+        "Code postal":"75001",
+        "Ville":"Paris",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":48.8596241,
+            "lng":2.3428556
+        }
+    },
+    {
+        "Nom du PDV":"Le Printemps Haussmann",
+        "Adresse":"64 Bd Haussmann",
+        "Code postal":"75009",
+        "Ville":"Paris",
+        "Téléphone":"01 42 82 50 00",
+        "Geo":{
+            "lat":48.8737871,
+            "lng":2.3282384
+        }
+    },
+    {
+        "Nom du PDV":"Aesthetic Corner",
+        "Adresse":"Place de l'amitié",
+        "Code postal":"13127",
+        "Ville":"Vitrolles",
+        "Téléphone":"06 22 17 52 41",
+        "Geo":{
+            "lat":43.426652,
+            "lng":5.285415
+        }
+    },
+    {
+        "Nom du PDV":"Nice Bear",
+        "Adresse":"9 Rue Mascoinat",
+        "Code postal":"06300",
+        "Ville":"Nice",
+        "Téléphone":"09 54 18 61 50",
+        "Geo":{
+            "lat":43.6976845,
+            "lng":7.276392199999999
+        }
+    },
+    {
+        "Nom du PDV":"L'Atelier des Sens",
+        "Adresse":"9 Rue du Héron",
+        "Code postal":"67300",
+        "Ville":"Schiltigheim",
+        "Téléphone":"06 99 42 61 38",
+        "Geo":{
+            "lat":48.62025,
+            "lng":7.76976
+        }
+    },
+    {
+        "Nom du PDV":"L'Herbe à Savon",
+        "Adresse":"27 Rue d'Assas",
+        "Code postal":"75006",
+        "Ville":"Paris",
+        "Téléphone":"01 42 22 26 02",
+        "Geo":{
+            "lat":48.84776,
+            "lng":2.32985
+        }
+    },
+    {
+        "Nom du PDV":"CosmEthique",
+        "Adresse":"Rue du Marché-au-Beurre 23",
+        "Code postal":"6700",
+        "Ville":"Arlon",
+        "Téléphone":"(+)32 63 24 00 76",
+        "Geo":{
+            "lat":49.68362519999999,
+            "lng":5.8157495
+        }
+    },
+    {
+        "Nom du PDV":"Bio Flamingo",
+        "Adresse":"Rue de courtrai 13",
+        "Code postal":"7500",
+        "Ville":"Tournai",
+        "Téléphone":"(+)32 69 67 06 62",
+        "Geo":{
+            "lat":50.6083917,
+            "lng":3.3873332
+        }
+    },
+    {
+        "Nom du PDV":"Cachemire Institut SPA",
+        "Adresse":"12 A rue de Brest",
+        "Code postal":"22120",
+        "Ville":"Hillion",
+        "Téléphone":"02 96 72 55 94",
+        "Geo":{
+            "lat":48.48508071899414,
+            "lng":-2.649268388748169
+        }
+    },
+    {
+        "Nom du PDV":"Senz Cosmetics",
+        "Adresse":"Rue Simonis 60",
+        "Code postal":"1050",
+        "Ville":"Ixelles",
+        "Téléphone":"(+)32 26 40 40 34",
+        "Geo":{
+            "lat":50.8255565,
+            "lng":4.3603634
+        }
+    },
+  {
+        "Nom du PDV":"Apotheek Wullens",
+        "Adresse":"Dendermondsesteenweg 46",
+        "Code postal":"9000",
+        "Ville":"Gent",
+        "Téléphone":"(+)32 486 96 06 86",
+        "Geo":{
+            "lat":51.05627,
+            "lng":3.74223
+        }
+    },
+    {
+        "Nom du PDV":"Mimosa",
+        "Adresse":"Alkaiou 4, Mytilene",
+        "Code postal":"81100",
+        "Ville":"Lesbos, GRÈCE",
+        "Téléphone":"(+)30 697 455 86 70",
+        "Geo":{
+            "lat":39.1055904,
+            "lng":26.5555988
+        }
+    },
+    {
+        "Nom du PDV":"The Detox Market",
+        "Adresse":"76, E Houston St",
+        "Code postal":"10012",
+        "Ville":"New-York City, ÉTATS-UNIS",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":40.7245744,
+            "lng":-73.9932475
+        }
+    },
+   {
+        "Nom du PDV":"The Detox Market",
+        "Adresse":"8380 Beverly Blvd",
+        "Code postal":"CA 90048",
+        "Ville":"Los Angeles, ÉTATS-UNIS",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":34.07644,
+            "lng":-118.37270
+        }
+    },
+  {
+        "Nom du PDV":"The Detox Market",
+        "Adresse":"1231 Montana Avenue",
+        "Code postal":"CA 90403",
+        "Ville":"Santa Monica, ÉTATS-UNIS",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":34.03196,
+            "lng":-118.49656
+        }
+    },
+  {
+        "Nom du PDV":"The Detox Market",
+        "Adresse":"116 Spadina Ave",
+        "Code postal":"ON M5V 2K6",
+        "Ville":"Toronto, CANADA",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":43.64736,
+            "lng":-79.39599
+        }
+    },
+    {
+        "Nom du PDV":"1609 Design",
+        "Adresse":"12 Reid Street ",
+        "Code postal":"HM 11",
+        "Ville":"Hamilton, CANADA",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":32.29311,
+            "lng":-64.78529
+        }
+    },
+    {
+        "Nom du PDV":"Zardin Papou",
+        "Adresse":"Mon Choisy Mall",
+        "Code postal":"-",
+        "Ville":", Grand Baie, ILE MAURICE",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":-20.024705122758057,
+            "lng":57.576784493696216
+        }
+    },
+    {
+        "Nom du PDV":"Zardin Papou",
+        "Adresse":"Ruisseau Créole",
+        "Code postal":"90608",
+        "Ville":"Grande Riviere Noire, ILE MAURICE",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":-20.358305741040713,
+            "lng":57.368982938218785
+        }
+    },
+    {
+        "Nom du PDV":"Island Beauty",
+        "Adresse":"1st Floor, Bâtiment de L’Antiquaire Crn Emile Sauzier-Virgile Naz  -  Small &amp; Chic",
+        "Code postal":"-",
+        "Ville":"Curepipe, ILE MAURICE",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":-20.313615839700688,
+            "lng":57.51954556908239
+        }
+    },
+   {
+        "Nom du PDV":"My Suprise Box",
+        "Adresse":"-",
+        "Code postal":"-",
+        "Ville":"Port-Louis, ILE MAURICE",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":-20.173115188786984,
+            "lng":57.47987995088447
+        }
+    },
+    {
+        "Nom du PDV":"La Petite Palmeraie",
+        "Adresse":"Coastal road",
+        "Code postal":"-",
+        "Ville":"Tamarin, ILE MAURICE",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":-20.346348475883833,
+            "lng":57.36416036908287
+        }
+    },
+    {
+        "Nom du PDV":"medM Office/Showroom",
+        "Adresse":"Stanley Ave",
+        "Code postal":"-",
+        "Ville":"Quatre Bornes, ILE MAURICE",
+        "Téléphone":"-",
+        "Geo":{
+            "lat":-20.25951367523986,
+            "lng":57.47326478442704
+        }
+    },
+    {
+        "Nom du PDV":"Vita Migliore ",
+        "Adresse":"Hoogstraat 152b",
+        "Code postal":"59470",
+        "Ville":"Dunkerque",
+        "Téléphone":"(+32)476 34 85 08",
+        "Geo":{
+            "lat":50.877813,
+            "lng":2.2982561
+        }
+    }
+]
+
+  // The marker, positioned at Uluru
+//   const marker = new google.maps.Marker({
+//     position: paris,
+//     map: map,
+//   });
+</script>

@@ -1,0 +1,41 @@
+<div class="mobile-nav--header">
+  {% if settings.search--show-in-header %}
+    <div class="mobile-nav--search" data-item="accent-text" style="margin-left: 32%;">
+      <a class="header--search" href="/search" role="img" aria-label="Rechercher" style="text-align: center;">
+    	<img width="30px" height="30px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/NEW_ICONES-00.svg?v=1634560343">
+      </a>
+      
+      
+      
+    </div>
+  {% endif %}
+   <div class="mobile-nav--search">
+      <a
+          class="header--find-us"
+          href="{% if request.locale.iso_code == 'en' %}/en{% endif %}/pages/ou-nous-trouver"
+          role="img"
+          aria-label="Ou nous trouver"
+          
+        >
+          <img width="30px" height="30px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/NEW_ICONES-01.svg?v=1634560343" style="max-width: none"/>
+        </a>
+  </div>
+  {% if shop.customer_accounts_enabled %}
+    <div class="mobile-nav--login" data-item="accent-text"  style="text-align: center;">
+      {% assign account_t = 'layout.header.account_view_link' | t %}
+      {% if customer %}
+        <a href="{{ routes.account_url }}">{{ account_t }}</a>
+      {% else %}
+        <a class="header--account-icon" href="/account/login" aria-label="Mon compte" >       
+			<img width="30px" height="30px" src="https://cdn.shopify.com/s/files/1/0592/6024/0036/files/NEW_ICONES-03.svg?v=1634560343">
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+<div class="mobile-nav--menu" data-item="accent-text"></div>
+
+<div class="mobile-nav--localization">
+ <span class="ly-custom-0"></span>
+</div>

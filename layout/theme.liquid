@@ -1,0 +1,415 @@
+{% comment %}ly_liquid_scripts_begin{% endcomment %}{% capture ly_liquid_content %}{% comment %}ly_liquid_scripts_end{% endcomment %}<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}"{% comment %}ly_dir_replace_for_[]_begin{% endcomment %} {%- assign language_code = '_' | append: request.locale.iso_code -%}{%- if '_ar_he_fa_ur' contains language_code -%}dir="rtl" {%- endif -%}{% comment %}ly_dir_replace_end{% endcomment %}>
+  <head>
+
+  <!-- CookiePro Cookies Consent Notice start for z-et-ma.com -->
+<script type="text/javascript" src="https://cookie-cdn.cookiepro.com/consent/9104ab29-d816-4b2d-9c47-c94bc5cd3f90/OtAutoBlock.js" ></script>
+<script src="https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="9104ab29-d816-4b2d-9c47-c94bc5cd3f90" ></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- CookiePro Cookies Consent Notice end for z-et-ma.com -->
+
+  
+    {% render 'pagefly-head' %}
+    <!-- Blockshop Theme - Version 7.0.3 by Troop Themes - https://troopthemes.com/ -->
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="p:domain_verify" content="a17e087ccb757cc69061f821ab212cab"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
+
+    <link rel="preload" href="{{ 'theme--critical.css' | asset_url }}" as="style">
+    <link rel="preload" href="{{ 'theme--async.css' | asset_url }}" as="style">
+    <link rel="preload" href="{{ 'lazysizes.min.js' | asset_url }}" as="script">
+    <link rel="preload" href="{{ 'theme.min.js' | asset_url }}" as="script">
+
+    {%- if canonical_url != blank -%}
+      <link rel="canonical" href="{{ canonical_url }}">
+    {%- endif -%}
+
+    {% if settings.favicon != blank %}
+      <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x' }}" type="image/png">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | img_url: '180x' }}">
+    {% endif %}
+
+    {% render 'framework--social-meta-tags' %}
+
+    {% if request.page_type == 'index' %}
+      <title>{{ page_title }}</title>
+    {% elsif request.page_type == 'password' %}
+      <title>{{ shop.name }}</title>
+    {% else %}
+      <title>{{ page_title }} | {{ shop.name }}</title>
+    {% endif %}
+
+    {% render 'framework--css-variables' %}
+    {% render 'partial--css-variables' %}
+    {% render 'partial--js-variables' %}
+
+    <script>
+      function onLoadStylesheet() {
+        const link = document.querySelector(`link[href="${theme.assets.stylesheet}"]`);
+        link.loaded = true;
+        link.dispatchEvent(new Event('load'));
+      }
+    </script>
+    <noscript>
+      <style>
+        body .layout--main-content > *,
+        body .header--root,
+        body .footer--root,
+        body .popup-modal-close,
+        body .modal--root,
+        body .modal--window {
+          opacity: 1;
+        }
+      </style>
+
+      <link href="{{ 'theme--async.css' | asset_url }}" rel="stylesheet">
+    </noscript>
+
+    <link href="{{ 'theme--critical.css' | asset_url }}" rel="stylesheet" media="all"/>
+    <link
+      href="{{ 'theme--async.css' | asset_url }}"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all';onLoadStylesheet()"
+    >
+  
+
+    <style>{% render 'custom-styles' %}</style>
+
+    <script src="{{ 'lazysizes.min.js' | asset_url }}" async="async"></script>
+    <script src="{{ 'theme.min.js' | asset_url }}" defer="defer"></script>
+
+    {% if request.page_type contains 'customers' %}
+      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+      <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer="defer"></script>
+    {% endif %}
+
+    {{ content_for_header }}
+    <STYLE>
+      #site-control > div.links.site-control__inner > div.site-control__inline-links > div > div > ul > li:nth-child(7) {
+      		display: none !important;
+      }
+      
+      @media only screen and (min-width: 768px) {
+      	.template--index .sticky {
+      		position:static !important;
+        }
+      	.template--index.scrolling .sticky {
+      		position:fixed !important;
+        }
+        .header--logo img {
+      		transition:all 0.4s ease-in-out;
+      		margin-bottom:20px !important;
+        }
+        .header--root {
+            padding: 20px 48px 0 !important;
+      		transition:all 0.4s ease-in-out;
+        }
+        .scrolling .header--root.sticky {
+      		padding-top:20px !important;
+        }
+      	.scrolling .header--logo img {
+      		margin-bottom:0 !important;
+        }
+      }
+    </STYLE>
+  
+  
+  
+	{{ shop.metafields.loox["global_html_head"] }}
+  {% render 'judgeme_core' %}
+{% render 'weglot_hreftags' %}
+{% render 'weglot_switcher' %}
+{% comment %}ly_dir_styles_begin{% endcomment %}{%- assign language_code = '_' | append: request.locale.iso_code -%}{%- if '_ar_he_fa_ur' contains language_code -%}{{- 'ly-rtl.css' | asset_url | stylesheet_tag -}}{%- endif -%}{% comment %}ly_dir_styles_end{% endcomment %}
+   {% render 'gtm-head' %}
+   {% include 'dataLayer-allPages' %}
+  </head>
+	
+  <body
+    class="page--{{ page_title | handle }} template--{{ template | split: '.' | first | remove: '/' | remove: '_' }}"
+    data-theme-id="606"
+    data-theme-name="Blockshop"
+    data-theme-version="7.0.3"
+    data-tabbing="false"
+  >
+    {% render 'gtm-body' %}
+    {% unless request.page_type == 'password' %}
+      <a data-item="a11y-button" href='#main-content'>
+        {{ 'general.skip_link' | t }}
+      </a>
+
+      <div
+        class="off-canvas--viewport"
+        data-js-class="OffCanvas"
+        data-off-canvas--state="closed"
+      >
+        <div class="off-canvas--overlay" data-js-class="Transition"></div>
+        <div
+          aria-label="{{ 'general.close' | t }}"
+          data-js-class="Transition"
+          data-off-canvas--close
+        >
+          {% render 'framework--icons', icon: 'cross' %}
+        </div>
+
+
+        <div class="off-canvas--main-content">
+          {% section 'announcement' %}
+          {% section 'header' %}
+    {% endunless %}
+
+    <main class="layout--main-content" id="main-content">
+      {{ content_for_layout }}
+    </main>
+
+    {% unless request.page_type == 'password' %}
+          {% section 'framework--footer' %}
+
+          <div class="popup-modal-close" aria-label="{{ 'general.close' | t }}" tabindex="0">
+            {% render 'framework--icons', icon: 'cross' %}
+          </div>
+          <div class="popup-modal-mask"></div>
+        </div>
+
+        <div
+          class="off-canvas--right-sidebar"
+          data-active="cart"
+          data-js-class="Transition"
+        >
+          <div class="off-canvas--focus-trigger" tabindex="0"></div>
+
+          {% if request.page_type == 'product' %}
+            <div class="off-canvas--container" data-view="pickup"></div>
+          {% endif %}
+
+          {% if request.page_type == 'collection' %}
+            <div class="off-canvas--container" data-view="collection-filter"></div>
+          {% endif %}
+
+          {% if settings.product--quick-add-enabled %}
+            <div class="off-canvas--container" data-view="product-form"></div>
+          {% endif %}
+
+          {% if settings.cart--type == 'drawer' or settings.product--quick-add-enabled %}
+            <div class="off-canvas--container" data-view="cart">
+              {% render 'framework--cart', view: 'mobile', is_drawer: true %}
+            </div>
+          {% endif %}
+
+          <div class="off-canvas--focus-trigger" tabindex="0"></div>
+        </div>
+
+        <div
+          class="off-canvas--left-sidebar"
+          data-active="menu"
+          data-js-class="Transition"
+        >
+          <div class="off-canvas--focus-trigger" tabindex="0"></div>
+
+          <div class="off-canvas--container" data-view="menu">
+            {% render 'partial--mobile-nav' %}
+          </div>
+
+          <div class="off-canvas--focus-trigger" tabindex="0"></div>
+        </div>
+
+        {% render 'framework--feedback-bar' %}
+        {% render 'partial--popup' %}
+
+      </div>
+
+      {% render 'framework--search', view: 'modal' %}
+      {% render 'framework--modal' %}
+    {% endunless %}
+
+  
+	{{ shop.metafields.loox["global_html_body"] }}
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+    <script>
+      $(function(){$.fn.scrollToTop=function(){$(this).hide().removeAttr("href");if($(window).scrollTop()!="0"){$(this).fadeIn("slow")}var scrollDiv=$(this);$(window).scroll(function(){if($(window).scrollTop()=="0"){$(scrollDiv).fadeOut("slow")}else{$(scrollDiv).fadeIn("slow")}});$(this).click(function(){$("html, body").animate({scrollTop:0},"slow")})}}); 
+      $(function(){
+       $("#toTop").scrollToTop();
+      });
+
+      
+      function checkAnimation(id) {
+          for (var i = 1; i < 6; i++) {
+            var sel = id + " > div.featured-grid--root > div > div > div:nth-child(" + i + ")";
+            var $elem = $(sel);
+			var d;
+            
+            // If the animation has already been started
+            if ($elem.hasClass('start') == false) {
+              d = document.querySelector(sel);
+              if (d != void 0) {
+                d = d.getBoundingClientRect()
+                if (d['top'] < 1100 && d['top'] > -100) {
+                      $elem.addClass('start');
+                }
+              }
+            }
+          }
+      }
+
+      // Capture scroll events
+      $(window).scroll(function(){
+          checkAnimation("#shopify-section-16308847395b44c55a");
+      });
+      
+      
+      var featured = document.querySelector("#shopify-section-163088518482a1cf88 > div > div > div > div.featured-content--text")
+      if (featured != void 0) {
+        featured.innerHTML = `
+      	<h3 style="margin-bottom: 10px" class="featured-content--title" data-view="desktop" data-item="section-heading">
+            {% if request.locale.iso_code == 'fr' %}
+			POUR NE RIEN LOUPER, ABONNEZ-VOUS À LA NEWSLETTER !
+            {% else %}
+            TO NOT MISS ANYTHING, SUBSCRIBE TO THE NEWSLETTER!
+            {% endif %}
+            </h3>
+		<h3 style="margin-bottom: 10px" class="featured-content--title" data-view="mobile" data-item="section-heading">
+              {% if request.locale.iso_code == 'fr' %}
+			POUR NE RIEN LOUPER, ABONNEZ-VOUS À LA NEWSLETTER !
+            {% else %}
+            TO NOT MISS ANYTHING, SUBSCRIBE TO THE NEWSLETTER!
+            {% endif %}
+            </h3>
+             {% form 'customer', id: 'newsletter_form' %}
+                {% if form.errors %}
+                  <p class="newsletter--failure">
+                  {% for field in form.errors %}
+                    {{ field }} {{ form.errors.messages[field] }}
+                  {% endfor %}
+                  </p>
+                {% endif %}
+                <input type="hidden" name="contact[tags]" value="newsletter" />
+                <label for="newsletter-email" data-item="hidden-text">Email</label>
+                <input
+				  style="text-align: center;font-size: 1.3em;"
+                  class="newsletter--email"
+                  id="newsletter-email"
+                  name="contact[email]"
+                  type="email"
+                  aria-label="{{ email_placeholder_t }}"
+                  placeholder="votre email ici"
+                  required
+                />
+                <div data-item='button'>
+				  
+				  <button type="submit" value="JE M'INSCRIS" 
+					style="
+					text-decoration: none;
+                    border: 1px solid black;
+                    color: white;
+                    background-color: black !important;
+					" 
+					class="btn" 
+					>
+                        {% if request.locale.iso_code == 'fr' %}
+			JE M'INSCRIS
+            {% else %}
+            I SUBSCRIBE
+            {% endif %}
+                  </button>
+                </div>
+				{% comment %}
+                  {% if form.posted_successfully? or form.errors %}
+                    <script>window.location.hash = '#feedback-bar--newsletter';</script>
+                  {% endif %}
+				{% endcomment %}
+                <div data-item="hidden-text">
+                  {% comment %} remove the below line to display reCAPTCHA badge {% endcomment %}
+                  {{ 'shopify.online_store.spam_detection.disclaimer_html' | t }}
+                </div>
+              {% endform %}
+      `}
+      </script>
+ {% include 'smile-initializer' %}
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script
+     src="//code.jquery.com/jquery-2.2.4.min.js"
+     integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+     crossorigin="anonymous"></script>
+    <div id="toTop"><i class="fa fa-arrow-up"></i></div>
+  
+  <!-- langify-v2-scripts-begin -->{% comment %}ly_liquid_scripts_begin{% endcomment %}{% endcapture %}{% render 'ly-liquid-scripts' content: ly_liquid_content %}{% comment %}ly_liquid_scripts_end{% endcomment %}{% comment %}ly_core_scripts_begin{% endcomment %}{% render 'ly-core-scripts' %}{% comment %}ly_core_scripts_end{% endcomment %}{% comment %}ly_switcher_factory_begin{% endcomment %}{% render 'ly-switcher-factory' %}{% comment %}ly_switcher_factory_end{% endcomment %}<!-- langify-v2-scripts-end --> {% render 'th-product-review' %}</body>
+<script>
+  var t = document.querySelectorAll("#shopify-section-1630884820f4dc8e43 > div > div > div > div")
+  var i = 0;
+  var loc = ["/pages/nos-engagments", "/pages/nos-engagments", "/pages/nos-engagments", "/pages/nos-engagments", "/pages/nos-engagments"];
+  while ( i < t.length) {
+    t[i].onclick = function() {window.location.replace(loc[i]);};
+    i += 1;
+  }
+  
+</script>
+
+<script>
+ 
+  {% if request.locale.iso_code == 'en' %}
+  t = document.querySelector("#shopify-section-16308857277ba5ca34 > div > div > div > div:nth-child(4) > div > div.featured-grid--item--text-container > div")
+   console.log(t.innerHTML);
+  if (t != void 0) {
+    t.innerHTML = "<p><strong>A SAMPLE<br>OF YOUR CHOICE OFFERED<br>WITH EVERY ORDER</strong></p>";
+  }
+  {% endif %}
+</script>
+
+<script>
+  links = document.querySelectorAll('a');
+  var link = void 0;
+  console.log(links)
+  for (var i = 0; i < links.length; i++){
+  	link = links[i].href;
+    console.log(link);
+    if (!link.includes('http') && link[0] == '/'){
+     link = '/en' + link;
+      console.log(link);
+    }
+    
+  }
+</script>
+
+<script>
+  var link = window.location.href;
+  
+{% if request.locale.iso_code == 'en' %}
+  if (link.includes("/pages/") && link.substr(link.length - 3) != '-en'){
+    if (!link.includes("ou-nous-trouver") && !link.includes("faq") && !link.includes("livraison") && !link.includes("jobs-postulez")) {
+    	location.assign(link + "-en");
+  	}
+  }
+  console.log(link.includes("/pages/"), link.includes("-en"));
+{% else %}
+  if (link.includes("/pages/") && link.substr(link.length - 3) == '-en'){
+    location.assign(link.slice(0, -3));
+  }
+{% endif %}
+  
+</script>
+
+<script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+<!-- <script type="text/javascript" src="./assets/custom.js"></script> -->
+
+
+
+
+<script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+{% render 'th-bundle-product' %}
+          </html>
